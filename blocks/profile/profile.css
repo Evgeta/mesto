@@ -1,0 +1,24 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  padding-top: 40px;
+
+
+  /* margin: 40px auto;
+  position: relative; */
+}
+
+ @media screen and (min-width: 768px) {
+  .profile {
+    flex-direction: row;
+
+  }
+}
+
+/* @media screen and (min-width: 1280px) {
+  .profile {
+    flex-direction: row;
+    }
+} */
