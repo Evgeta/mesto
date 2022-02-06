@@ -1,5 +1,5 @@
 .profile__name-edit-btn {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
     /* align-items: baseline; */
 }
