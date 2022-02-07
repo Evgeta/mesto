@@ -1,6 +1,6 @@
 .gallery {
   display: grid;
-  width: 100%;
+  width: calc(100% - 38px);
   grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
   grid-template-rows: auto;
   /* gap: 20px; */
@@ -21,6 +21,7 @@
   .gallery {
     /* width: calc(100% - 96px); */
     /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
+    /* width: calc(100% - 200px); */
     grid-template-columns: repeat(2, 1fr);
     /* padding: 92px 0 0;
     gap: 14px; */
@@ -31,6 +32,7 @@
   .gallery {
     /* width: calc(100% - 96px); */
     /* grid-template-columns: repeat(auto-fit, minmax(284px, 1fr)); */
+    width: 100%;
     grid-template-columns: repeat(3, 1fr);
 
     /* gap: 16px; */

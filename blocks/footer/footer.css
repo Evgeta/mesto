@@ -1,24 +1,21 @@
 .footer {
-  width: calc(100% - 32px);
   display: flex;
-  flex-direction: column;
-  padding-top: 64px;
-  padding-bottom: 24px;
+  justify-content: flex-start;
+  width: calc(100% - 38px);
+  padding-bottom: 36px;
+  padding-top: 48px;
 }
 
 @media screen and (min-width: 768px) {
   .footer {
-    width: calc(100% - 48px);
-    padding-top: 88px;
-    padding-bottom: 24px;
-    flex-direction: row;
-    justify-content: space-between;
+    width: calc(100% - 200px);
+    padding-bottom: 60px;
+    padding-top: 67px;
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1280px) {
   .footer {
-    width: calc(100% - 96px);
-    padding-top: 92px;
+    width: calc(100% - 400px);
   }
 }
