@@ -6,9 +6,28 @@
   border-radius: 2px;
   /* Сохранить */
   font-size: 14px;
-  line-height: 17px;
+  line-height: 1.21;
   text-align: center;
   color: white;
+
+
+  /* font-family: inherit; */
+  /* font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal; */
+  /*font-weight: normal; */
+  font-size: 18px;
+  line-height: 22px;
+  /* text-align: center; */
+  /* color: #FFFFFF; */
+  margin: 45px 0 25px;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+}
+
+.popup__btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  transition: ease-in-out 0.2s;
 }
 
 
