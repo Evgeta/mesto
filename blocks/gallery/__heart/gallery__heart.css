@@ -1,17 +1,16 @@
 .gallery__heart {
-  /* background: inherit; */
   border: 0;
-  background-image: url('../../../images/heart.svg');
-	background-repeat: no-repeat;
-	width: 22px;
-	height: 19px;
-	cursor: pointer;
-	/* transition: .3s linear; */
+  background-image: url("../../../images/heart.svg");
+  background-repeat: no-repeat;
+  background-color: transparent;
+  width: 22px;
+  height: 19px;
+  cursor: pointer;
   transition: ease-in-out 0.2s;
 }
 
-.gallery__like:hover {
-	/* opacity: .6; */
-  background-image: url('../../../images/heart_hover.svg');
-  /* transition: ease-in-out 0.2s; */
+.gallery__heart:hover {
+  opacity: 0.6;
+  background-image: url("../../../images/heart_hover.svg");
+  transition: ease-in-out 0.2s;
 }

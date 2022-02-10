@@ -1,23 +1,15 @@
 .profile__edit-btn {
   width: 18px;
   height: 18px;
-  border: 1px solid #FFFFFF;
+  border: 1px solid #ffffff;
   box-sizing: border-box;
-  /* border: none;
-  outline: none; */
   cursor: pointer;
   background-color: transparent;
   padding: 0;
-  -webkit-appearance: none;
-  /* overflow: hidden; */
-  /* margin-top: 37px;*/
-  /* margin-left: 10px; */
   background-image: url("../../../images/edit-button.svg");
   background-position: center;
   background-repeat: no-repeat;
-  /* margin-bottom: 7px; */
   margin: 25px 0 0 10px;
-  /* position: relative; */
 }
 
 .profile__edit-btn:hover {
@@ -31,6 +23,5 @@
     height: 24px;
     margin-left: 18px;
     margin-top: 0;
-    /* margin-bottom: 9px; */
   }
 }

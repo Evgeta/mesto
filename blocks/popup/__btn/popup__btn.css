@@ -1,24 +1,12 @@
 .popup__btn {
   width: 238px;
-  /* width: calc(100% - 44px); */
   height: 46px;
   background: black;
   border-radius: 2px;
-  /* Сохранить */
   font-size: 14px;
   line-height: 1.21;
   text-align: center;
   color: white;
-
-
-  /* font-family: inherit; */
-  /* font-family: 'Inter', 'Arial', sans-serif;
-  font-style: normal; */
-  /*font-weight: normal; */
-  font-size: 18px;
-  line-height: 22px;
-  /* text-align: center; */
-  /* color: #FFFFFF; */
   margin: 45px 0 25px;
   cursor: pointer;
   border: 0;
@@ -30,12 +18,11 @@
   transition: ease-in-out 0.2s;
 }
 
-
-@media (min-width:1024px) {
-	.popup__btn {
-      width: 358px;
-      height: 50px;
-      font-size: 18px;
-      line-height: 22px;
-	}
+@media (min-width: 768px) {
+  .popup__btn {
+    width: 358px;
+    height: 50px;
+    font-size: 18px;
+    margin: 48px 0 37px;
+  }
 }

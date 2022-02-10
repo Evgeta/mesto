@@ -12,7 +12,7 @@
   margin: 0;
 }
 
-@media (min-width: 1260px) {
+@media (min-width: 1240px) {
 	.gallery__place-name {
 		 max-width: 190px;
 	}

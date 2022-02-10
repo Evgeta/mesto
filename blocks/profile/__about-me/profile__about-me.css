@@ -1,4 +1,4 @@
-.profile__job {
+.profile__about-me {
   font-size: 14px;
   line-height: 1.21;
   padding-top: 14px;
@@ -6,15 +6,13 @@
 }
 
 @media screen and (min-width: 768px) {
-  .profile__job {
-    /**/
-    /* padding-top: 0; */
+  .profile__about-me {
     font-size: 16px;
   }
 }
 
 @media screen and (min-width: 1280px) {
-  .profile__job {
+  .profile__about-me {
     padding-top: 16;
     font-size: 18px;
   }

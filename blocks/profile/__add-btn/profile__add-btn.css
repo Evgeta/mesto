@@ -1,8 +1,7 @@
 .profile__add-btn {
-  /* width: calc(100% - 38px); */
   width: 282px;
   height: 50px;
-  border: 2px solid #FFFFFF;
+  border: 2px solid #ffffff;
   outline: none;
   box-sizing: border-box;
   border-radius: 2px;
@@ -12,18 +11,17 @@
   background-color: transparent;
   margin-top: 36px;
   cursor: pointer;
-  -webkit-appearance: none;
   overflow: hidden;
-
-  /* -webkit-appearance: none; */
-
 }
 
+.profile__add-btn:hover {
+  opacity: 0.6;
+  transition: ease-in-out 0.2s;
+}
 
 @media screen and (min-width: 1024px) {
   .profile__add-btn {
     width: 150px;
     margin: 0;
-    /* justify-self: flex-end; */
   }
 }
