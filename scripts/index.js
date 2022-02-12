@@ -21,8 +21,8 @@ function closeEditProfilePopup() {
 function fillProfilePopupValues() {
   let profileNameValue = profile.querySelector('.profile__name');
   let profileAboutValue = profile.querySelector('.profile__about-me');
-  let inputName = popupEditProfile.querySelector('.popup__input_name');
-  let inputAbout = popupEditProfile.querySelector('.popup__input_about');
+  let inputName = popupEditProfile.querySelector('.popup__input_type_name');
+  let inputAbout = popupEditProfile.querySelector('.popup__input_type_about');
   inputName.value = profileNameValue.textContent;
   inputAbout.value = profileAboutValue.textContent;
 }
@@ -32,8 +32,8 @@ function formEditProfileSubmit(evt) {
   evt.preventDefault();
   let profileNameValue = profile.querySelector('.profile__name');
   let profileAboutValue = profile.querySelector('.profile__about-me');
-  let inputName = popupEditProfile.querySelector('.popup__input_name');
-  let inputAbout = popupEditProfile.querySelector('.popup__input_about');
+  let inputName = popupEditProfile.querySelector('.popup__input_type_name');
+  let inputAbout = popupEditProfile.querySelector('.popup__input_type_about');
   profileNameValue.textContent = inputName.value;
   profileAboutValue.textContent = inputAbout.value;
   closeEditProfilePopup();
