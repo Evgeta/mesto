@@ -21,6 +21,8 @@
 @import url(../blocks/gallery/__place-info/gallery__place-info.css);
 @import url(../blocks/gallery/__place-name/gallery__place-name.css);
 @import url(../blocks/gallery/__heart/gallery__heart.css);
+@import url(../blocks/gallery/__delete-icon/gallery__delete-icon.css);
+@import url(../blocks/gallery/__delete-icon/_hidden/gallery__delete-icon_hidden.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/popup.css);

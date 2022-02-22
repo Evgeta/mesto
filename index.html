@@ -28,8 +28,22 @@
         <button class="profile__add-btn" value="add-btn" type="button"></button>
       </section>
       <section class="gallery">
+        <template id="gallery__item">
+          <div class="gallery__item">
+            <img class="gallery__image" src="#" alt="Название места">
+            <div class="gallery__place-info">
+              <p class="gallery__place-name"></p>
+              <button class="gallery__heart" type="button"></button>
+            </div>
+          </div>
+        </template>
+
+
         <div class="gallery__item">
           <img class="gallery__image" src="./images/kizhi.jpg" alt="Озеро Кижи">
+          <button class="gallery__delete-icon gallery__delete-icon_hidden" type="button">
+            <img src="./images/delete_icon.svg" alt="Удалить место">
+         </button>
           <div class="gallery__place-info">
             <p class="gallery__place-name">Озеро Кижи</p>
             <button class="gallery__heart" type="button"></button>
@@ -90,6 +104,23 @@
       </div>
     </div>
   </div>
+
+  <div class="popup">
+    <div class="popup__container">
+      <button class="popup__close-btn" type="button"></button>
+      <form class="popup__form">
+        <h3 class="popup__title">Новое место</h3>
+        <fieldset class="popup__fieldset">
+          <input type="text" class="popup__input popup__input_name" placeholder="Название" required>
+          <input type="text" class="popup__input popup__input_about" placeholder="О себе" required>
+          <button type="submit" class="popup__btn">Сохранить</button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+
+
   <script src="./scripts/index.js"></script>
 </body>
 
