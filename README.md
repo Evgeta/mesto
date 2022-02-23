@@ -1,4 +1,4 @@
-# Проект: Учебный проект Яндекс.Практикума. Спринт 4. Место.
+# Проект: Учебный проект Яндекс.Практикума. Спринт 5. Место.
 ### Обзор
 * Описание проекта
 * Технологии
@@ -27,9 +27,9 @@
 
 Проект сделан по следующему макету:
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=28212%3A155)
+* [Ссылка на макет в Figma](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=0%3A1)
 
-Чеклист по проекту [Чеклист](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-4.pdf)
+Чеклист по проекту [Чеклист](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-5.pdf)
 
 [Ссылка на проект](https://evgeta.github.io/mesto/)
 
