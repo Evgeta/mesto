@@ -46,69 +46,38 @@ editProfileCloseButton.addEventListener("click", closeEditProfilePopup);
 /*Слушатель на подтверждение формы*/
 editProfileForm.addEventListener("submit", formEditProfileSubmit);
 
-
-
 /*Блок динамического добавления карточек*/
 
 /*Список карточек в начальном состоянии*/
-const initialCards = [
-
-
-  {
-    name: "Карачаево-черкесия",
-    link: "./images/karachaevo.jpg",
-  },
-  {
+const initialCards = [{
     name: "Архыз",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
   },
   {
-    name: "Озеро Кижи",
-    link: "./images/kizhi.jpg",
+    name: "Челябинская область",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
   },
   {
-    name: "Соловки",
-    link: "./images/solovki.jpg",
+    name: "Иваново",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
   },
   {
-    name: "Кучерлинские озёра, Алтай",
-    link: "./images/kucherlinskie.jpg",
+    name: "Камчатка",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
   },
   {
-    name: "Морской порт, Владивосток",
-    link: "./images/sea_port_vladivostok.jpg",
+    name: "Холмогорский район",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
   },
   {
-    name: "Спасо-Яковлевский монастырь в Ростове Великом",
-    link: "./images/spaso-yarsl.jpg",
-  },
-  {
-    name: "Кремль, Казань",
-    link: "./images/kazan-kreml.jpg",
+    name: "Байкал",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
   }
 ];
 
 /*Список карточек после возможной модификации*/
 const cards = initialCards.slice();
-
-/*
- <template id="gallery__item">
-          <article class="gallery__item">
-            <img class="gallery__image" src="#" alt="Название места">
-            <button class="gallery__delete-icon" type="button">
-              <img src="./images/delete_icon.svg" alt="Удалить место">
-            </button>
-            <div class="gallery__place-info">
-              <h2 class="gallery__place-name"></h2>
-              <button class="gallery__heart" type="button" aria-label="Кнопка лайка"></button>
-            </div>
-          </article>
-        </template>
-
-*/
-
 const gallery = document.querySelector('.gallery');
-
 const galleryItemTemplate = document.querySelector('#gallery__item').content;
 
 function setEventListenersOnGalleryItems(galleryItem) {
@@ -123,34 +92,28 @@ function removeEventListenersOnGalleryItems(galleryItem) {
   galleryItem.querySelector(".gallery__image").removeEventListener("click", showBigImage);
 }
 
-function setLike(evt){
+function setLike(evt) {
   evt.target.classList.toggle("gallery__heart_active");
 }
 
 function renderGalleryItem(item) {
   // клонируем содержимое тега template
   const galleryItem = galleryItemTemplate.querySelector('.gallery__item').cloneNode(true);
-  //const galleryItem = galleryItemTemplate.cloneNode(true);
-
   // наполняем содержимым
   galleryItem.querySelector('.gallery__image').src = item.link;
   galleryItem.querySelector('.gallery__image').alt = item.name;
   galleryItem.querySelector('.gallery__place-name').textContent = item.name;
-
   setEventListenersOnGalleryItems(galleryItem);
-
   // отображаем на странице
   gallery.append(galleryItem);
-
 }
 
-function renderGallery(){
+function renderGallery() {
   cards.forEach(renderGalleryItem);
 }
 
 /*Функция удаления карточки*/
-
-function deleteCard(evt){
+function deleteCard(evt) {
   const cardElement = evt.target.closest(".gallery__item");
   removeEventListenersOnGalleryItems(cardElement);
   cardElement.remove();
@@ -159,7 +122,6 @@ function deleteCard(evt){
 renderGallery();
 
 /*Отображение формы для новой карточки*/
-
 const placeAddButton = profile.querySelector(".profile__add-btn");
 const popupNewPlace = document.querySelector(".popup_new-place");
 const addPlaceCloseButton = popupNewPlace.querySelector(".popup__close-btn");
@@ -180,24 +142,20 @@ function closeAddPlacePopup() {
 /*Функция подтверждения данных из формы добавления*/
 function formAddPlaceSubmit(evt) {
   evt.preventDefault();
-
   const newplace = {
     name: "",
     link: ""
   }
-
   const inputName = popupNewPlace.querySelector(".popup__input_type_name");
   const inputLink = popupNewPlace.querySelector(".popup__input_type_link");
   newplace.name = inputName.value;
   newplace.link = inputLink.value;
-
   inputName.value = "";
   inputLink.value = "";
-
   //добавим карточку в массив
   cards.unshift(newplace);
   closeAddPlacePopup();
-  removeOldCards ();
+  removeOldCards();
   renderGallery();
 }
 
@@ -217,7 +175,6 @@ function removeOldCards() {
 }
 
 /*Открытие попапа с увеличенной картинкой*/
-
 const popupBigImage = document.querySelector(".popup_big-image");
 const showBigImageCloseButton = popupBigImage.querySelector(".popup__close-btn");
 
