@@ -75,33 +75,11 @@ const initialCards = [
   {
     name: "Кремль, Казань",
     link: "./images/kazan-kreml.jpg",
-  },
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
+  }
 ];
 
+/*Список карточек после возможной модификации*/
+const cards = initialCards.slice();
 
 /*
  <template id="gallery__item">
@@ -125,8 +103,17 @@ const galleryItemTemplate = document.querySelector('#gallery__item').content;
 
 function setEventListenersOnGalleryItems(galleryItem) {
   galleryItem.querySelector(".gallery__delete-icon").addEventListener("click", deleteCard);
+  galleryItem.querySelector(".gallery__heart").addEventListener("click", setLike);
 }
 
+function removeEventListenersOnGalleryItems(galleryItem) {
+  galleryItem.querySelector(".gallery__delete-icon").removeEventListener("click", deleteCard);
+  galleryItem.querySelector(".gallery__heart").removeEventListener("click", setLike);
+}
+
+function setLike(evt){
+  evt.target.classList.toggle("gallery__heart_active");
+}
 
 function renderGalleryItem(item) {
   // клонируем содержимое тега template
@@ -143,28 +130,21 @@ function renderGalleryItem(item) {
   // отображаем на странице
   gallery.append(galleryItem);
 
- // console.log(galleryItem);
 }
-
 
 function renderGallery(){
-  initialCards.forEach(renderGalleryItem);
+  cards.forEach(renderGalleryItem);
 }
-
-
 
 /*Функция удаления карточки*/
 
 function deleteCard(evt){
   const cardElement = evt.target.closest(".gallery__item");
+  removeEventListenersOnGalleryItems(cardElement);
   cardElement.remove();
 }
 
-
 renderGallery();
-
-
-
 
 /*Отображение формы для новой карточки*/
 
@@ -188,9 +168,26 @@ function closeAddPlacePopup() {
 /*Функция подтверждения данных из формы добавления*/
 function formAddPlaceSubmit(evt) {
   evt.preventDefault();
-  closeAddPlacePopup();
-}
 
+  const newplace = {
+    name: "",
+    link: ""
+  }
+
+  const inputName = popupNewPlace.querySelector(".popup__input_type_name");
+  const inputLink = popupNewPlace.querySelector(".popup__input_type_link");
+  newplace.name = inputName.value;
+  newplace.link = inputLink.value;
+
+  inputName.value = "";
+  inputLink.value = "";
+
+  //добавим карточку в массив
+  cards.unshift(newplace);
+  closeAddPlacePopup();
+  removeOldCards ();
+  renderGallery();
+}
 
 /*Обработчики попапа на добавление нового места*/
 
@@ -201,6 +198,11 @@ addPlaceCloseButton.addEventListener("click", closeAddPlacePopup);
 /*Слушатель на подтверждение формы*/
 addPlaceForm.addEventListener("submit", formAddPlaceSubmit);
 
+function removeOldCards() {
+  const cardElements = gallery.querySelectorAll(".gallery__item");
+  const cardElementsArray = Array.from(cardElements);
+  cardElementsArray.forEach(item => item.remove());
+}
 
 
 
