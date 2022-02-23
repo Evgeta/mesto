@@ -95,7 +95,7 @@
     <footer class="footer">
       <p class="footer__copyright">© 2022 Mesto Russia</p>
     </footer>
-    <div class="popup">
+    <div class="popup popup_edit-profile">
       <div class="popup__container">
         <button class="popup__close-btn" type="button" aria-label="Кнопка закрытия всплывающего окна"></button>
         <form class="popup__form" name="editProfileForm">
@@ -109,21 +109,21 @@
       </div>
     </div>
   </div>
-<!--
-  <div class="popup">
+
+  <div class="popup popup_new-place">
     <div class="popup__container">
-      <button class="popup__close-btn" type="button"></button>
-      <form class="popup__form">
+      <button class="popup__close-btn" type="button" aria-label="Кнопка закрытия всплывающего окна"></button>
+      <form class="popup__form" name="newPlaceForm">
         <h3 class="popup__title">Новое место</h3>
         <fieldset class="popup__fieldset">
-          <input type="text" class="popup__input popup__input_name" placeholder="Название" required>
-          <input type="text" class="popup__input popup__input_about" placeholder="О себе" required>
-          <button type="submit" class="popup__btn">Сохранить</button>
+          <input type="text" class="popup__input popup__input_type_name" placeholder="Название" required>
+          <input type="text" class="popup__input popup__input_type_link" placeholder="Ссылка на картинку" required>
+          <button type="submit" class="popup__btn">Создать</button>
         </fieldset>
       </form>
     </div>
   </div>
-</div> -->
+</div>
 
 
   <script src="./scripts/index.js"></script>

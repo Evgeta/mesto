@@ -1,20 +1,19 @@
 const profile = document.querySelector(".profile");
 const profieNameEditButton = profile.querySelector(".profile__name-edit-btn");
-const popupEditProfile = document.querySelector(".popup");
-const editProfileCloseButton =
-  popupEditProfile.querySelector(".popup__close-btn");
-  const editProfileForm = popupEditProfile.querySelector(".popup__form");
+const popupEditProfile = document.querySelector(".popup_edit-profile");
+const editProfileCloseButton = popupEditProfile.querySelector(".popup__close-btn");
+const editProfileForm = popupEditProfile.querySelector(".popup__form");
 
 /*Функция открывает попап редактирования профиля*/
 function openEditProfilePopup() {
-  const popupEditProfile = document.querySelector(".popup");
+  const popupEditProfile = document.querySelector(".popup_edit-profile");
   popupEditProfile.classList.add("popup_opened");
   fillProfilePopupValues();
 }
 
 /*Функция закрывает попап редактирования профиля*/
 function closeEditProfilePopup() {
-  const popupEditProfile = document.querySelector(".popup");
+  const popupEditProfile = document.querySelector(".popup_edit-profile");
   popupEditProfile.classList.remove("popup_opened");
 }
 
@@ -28,7 +27,7 @@ function fillProfilePopupValues() {
   inputAbout.value = profileAboutValue.textContent;
 }
 
-/*Функция подтверждения данных их формы*/
+/*Функция подтверждения данных из формы*/
 function formEditProfileSubmit(evt) {
   evt.preventDefault();
   const profileNameValue = profile.querySelector(".profile__name");
@@ -47,6 +46,9 @@ editProfileCloseButton.addEventListener("click", closeEditProfilePopup);
 /*Слушатель на подтверждение формы*/
 editProfileForm.addEventListener("submit", formEditProfileSubmit);
 
+
+
+/*Блок динамического добавления карточек*/
 
 /*Список карточек в начальном состоянии*/
 const initialCards = [
@@ -102,7 +104,6 @@ const initialCards = [
 
 
 /*
-
  <template id="gallery__item">
           <article class="gallery__item">
             <img class="gallery__image" src="#" alt="Название места">
@@ -118,13 +119,11 @@ const initialCards = [
 
 */
 
-
 const gallery = document.querySelector('.gallery');
 
 const galleryItemTemplate = document.querySelector('#gallery__item').content;
 
 function setEventListenersOnGalleryItems(galleryItem) {
-  galleryItem.querySelector(".gallery__delete-icon").addEventListener("hover", showDeleteIcon);
   galleryItem.querySelector(".gallery__delete-icon").addEventListener("click", deleteCard);
 }
 
@@ -139,14 +138,12 @@ function renderGalleryItem(item) {
   galleryItem.querySelector('.gallery__image').alt = item.name;
   galleryItem.querySelector('.gallery__place-name').textContent = item.name;
 
-  //setEventListenersOnGalleryItems();
+  setEventListenersOnGalleryItems(galleryItem);
 
   // отображаем на странице
   gallery.append(galleryItem);
 
-  console.log(galleryItem);
-
-
+ // console.log(galleryItem);
 }
 
 
@@ -154,11 +151,6 @@ function renderGallery(){
   initialCards.forEach(renderGalleryItem);
 }
 
-/*Функция открывает попап редактирования профиля*/
-function showDeleteIcon() {
-  const cardDeleteIcon = document.querySelector(".gallery__delete-icon");
-  cardDeleteIcon.classList.remove("gallery__delete-icon_hidden");
-}
 
 
 /*Функция удаления карточки*/
@@ -172,15 +164,43 @@ function deleteCard(evt){
 renderGallery();
 
 
-/*Иконки удаления*/
-// const cardDeleteIcon = document.querySelector(".gallery__delete-icon");
-
-/*Слушатель на движение курсора над иконкой удаления */
-// cardDeleteIcon.addEventListener("hover", showDeleteIcon);
 
 
+/*Отображение формы для новой карточки*/
 
-/*Слушатель на нажатие кнопки удаления карточки*/
-//profieNameEditButton.addEventListener("click", openEditProfilePopup);
+const placeAddButton = profile.querySelector(".profile__add-btn");
+const popupNewPlace = document.querySelector(".popup_new-place");
+const addPlaceCloseButton = popupNewPlace.querySelector(".popup__close-btn");
+const addPlaceForm = popupNewPlace.querySelector(".popup__form");
+
+/*Функция открывает попап добавления места*/
+function openAddPlacePopup() {
+  const popupNewPlace = document.querySelector(".popup_new-place");
+  popupNewPlace.classList.add("popup_opened");
+}
+
+/*Функция закрывает попап добавления места*/
+function closeAddPlacePopup() {
+  const popupNewPlace = document.querySelector(".popup_new-place");
+  popupNewPlace.classList.remove("popup_opened");
+}
+
+/*Функция подтверждения данных из формы добавления*/
+function formAddPlaceSubmit(evt) {
+  evt.preventDefault();
+  closeAddPlacePopup();
+}
+
+
+/*Обработчики попапа на добавление нового места*/
+
+/*Слушатель на всплывание попапа на добавление места*/
+placeAddButton.addEventListener("click", openAddPlacePopup);
+/*Слушатель на закрытие попапа*/
+addPlaceCloseButton.addEventListener("click", closeAddPlacePopup);
+/*Слушатель на подтверждение формы*/
+addPlaceForm.addEventListener("submit", formAddPlaceSubmit);
+
+
 
 
