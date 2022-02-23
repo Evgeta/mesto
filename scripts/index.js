@@ -47,6 +47,8 @@ editProfileCloseButton.addEventListener("click", closeEditProfilePopup);
 /*Слушатель на подтверждение формы*/
 editProfileForm.addEventListener("submit", formEditProfileSubmit);
 
+
+/*Список карточек в начальном состоянии*/
 const initialCards = [
   {
     name: "Озеро Кижи",
@@ -70,7 +72,7 @@ const initialCards = [
   },
   {
     name: "Кремль, Казань",
-    link: "./images/kazan kreml.jpg",
+    link: "./images/kazan-kreml.jpg",
   },
   {
     name: "Архыз",
@@ -99,36 +101,82 @@ const initialCards = [
 ];
 
 
+/*
+
+ <template id="gallery__item">
+          <article class="gallery__item">
+            <img class="gallery__image" src="#" alt="Название места">
+            <button class="gallery__delete-icon" type="button">
+              <img src="./images/delete_icon.svg" alt="Удалить место">
+            </button>
+            <div class="gallery__place-info">
+              <h2 class="gallery__place-name"></h2>
+              <button class="gallery__heart" type="button" aria-label="Кнопка лайка"></button>
+            </div>
+          </article>
+        </template>
+
+*/
+
+
 const gallery = document.querySelector('.gallery');
 
 const galleryItemTemplate = document.querySelector('#gallery__item').content;
 
-// клонируем содержимое тега template
-const galleryItem = galleryItemTemplate.querySelector('.gallery__item').cloneNode(true);
-
-// наполняем содержимым
-galleryItem.querySelector('.gallery__image').src = './images/kizhi.jpg';
-galleryItem.querySelector('.gallery__image').alt = 'Озеро Кижи';
-galleryItem.querySelector('.gallery__place-name').textContent = 'Озеро Кижи';
-
-// отображаем на странице
-//gallery.append(galleryItem);
+function setEventListenersOnGalleryItems(galleryItem) {
+  galleryItem.querySelector(".gallery__delete-icon").addEventListener("hover", showDeleteIcon);
+  galleryItem.querySelector(".gallery__delete-icon").addEventListener("click", deleteCard);
+}
 
 
-//initialCards.forEach()
+function renderGalleryItem(item) {
+  // клонируем содержимое тега template
+  const galleryItem = galleryItemTemplate.querySelector('.gallery__item').cloneNode(true);
+  //const galleryItem = galleryItemTemplate.cloneNode(true);
 
+  // наполняем содержимым
+  galleryItem.querySelector('.gallery__image').src = item.link;
+  galleryItem.querySelector('.gallery__image').alt = item.name;
+  galleryItem.querySelector('.gallery__place-name').textContent = item.name;
+
+  //setEventListenersOnGalleryItems();
+
+  // отображаем на странице
+  gallery.append(galleryItem);
+
+  console.log(galleryItem);
+
+
+}
+
+
+function renderGallery(){
+  initialCards.forEach(renderGalleryItem);
+}
 
 /*Функция открывает попап редактирования профиля*/
 function showDeleteIcon() {
   const cardDeleteIcon = document.querySelector(".gallery__delete-icon");
-  cardDeleteIcon.classList.toggle("gallery__delete-icon_hidden");
+  cardDeleteIcon.classList.remove("gallery__delete-icon_hidden");
 }
 
+
+/*Функция удаления карточки*/
+
+function deleteCard(evt){
+  const cardElement = evt.target.closest(".gallery__item");
+  cardElement.remove();
+}
+
+
+renderGallery();
+
+
 /*Иконки удаления*/
-const cardDeleteIcon = document.querySelector(".gallery__delete-icon");
+// const cardDeleteIcon = document.querySelector(".gallery__delete-icon");
 
 /*Слушатель на движение курсора над иконкой удаления */
-cardDeleteIcon.addEventListener("hover", showDeleteIcon);
+// cardDeleteIcon.addEventListener("hover", showDeleteIcon);
 
 
 
