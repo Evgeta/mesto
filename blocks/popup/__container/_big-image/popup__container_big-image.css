@@ -1,0 +1,13 @@
+.popup__container_big-image {
+
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+
+}
+
+@media (min-width: 768px) {
+  .popup__container {
+     width: 75vw;
+  }
+}

@@ -52,6 +52,16 @@ editProfileForm.addEventListener("submit", formEditProfileSubmit);
 
 /*Список карточек в начальном состоянии*/
 const initialCards = [
+
+
+  {
+    name: "Карачаево-черкесия",
+    link: "./images/karachaevo.jpg",
+  },
+  {
+    name: "Архыз",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+  },
   {
     name: "Озеро Кижи",
     link: "./images/kizhi.jpg",
@@ -104,11 +114,13 @@ const galleryItemTemplate = document.querySelector('#gallery__item').content;
 function setEventListenersOnGalleryItems(galleryItem) {
   galleryItem.querySelector(".gallery__delete-icon").addEventListener("click", deleteCard);
   galleryItem.querySelector(".gallery__heart").addEventListener("click", setLike);
+  galleryItem.querySelector(".gallery__image").addEventListener("click", showBigImage);
 }
 
 function removeEventListenersOnGalleryItems(galleryItem) {
   galleryItem.querySelector(".gallery__delete-icon").removeEventListener("click", deleteCard);
   galleryItem.querySelector(".gallery__heart").removeEventListener("click", setLike);
+  galleryItem.querySelector(".gallery__image").removeEventListener("click", showBigImage);
 }
 
 function setLike(evt){
@@ -204,5 +216,25 @@ function removeOldCards() {
   cardElementsArray.forEach(item => item.remove());
 }
 
+/*Открытие попапа с увеличенной картинкой*/
 
+const popupBigImage = document.querySelector(".popup_big-image");
+const showBigImageCloseButton = popupBigImage.querySelector(".popup__close-btn");
 
+function showBigImage(evt) {
+  const popupBigImage = document.querySelector(".popup_big-image");
+  const imageOnForm = popupBigImage.querySelector(".popup__big-image");
+  imageOnForm.src = evt.target.src;
+  imageOnForm.alt = evt.target.alt;
+  const imageCaption = popupBigImage.querySelector(".popup__image-caption");
+  imageCaption.textContent = evt.target.alt;
+  popupBigImage.classList.add("popup_opened");
+}
+
+/*Слушатель на закрытие попапа отображения большой картинки*/
+showBigImageCloseButton.addEventListener("click", closeBigImagePopup);
+
+/*Функция закрывает попап большой картинка*/
+function closeBigImagePopup() {
+  popupBigImage.classList.remove("popup_opened");
+}
