@@ -152,6 +152,9 @@ function closeAddPlacePopup() {
   closePopup(popupNewPlace);
 }
 
+const inputCardName = popupNewPlace.querySelector(".popup__input_type_name");
+const inputCardLink = popupNewPlace.querySelector(".popup__input_type_link");
+
 /*Функция подтверждения данных из формы добавления*/
 function formAddPlaceSubmit(evt) {
   evt.preventDefault();
@@ -159,12 +162,10 @@ function formAddPlaceSubmit(evt) {
     name: "",
     link: ""
   }
-  const inputName = popupNewPlace.querySelector(".popup__input_type_name");
-  const inputLink = popupNewPlace.querySelector(".popup__input_type_link");
-  newplace.name = inputName.value;
-  newplace.link = inputLink.value;
-  inputName.value = "";
-  inputLink.value = "";
+  newplace.name = inputCardName.value;
+  newplace.link = inputCardLink.value;
+  inputCardName.value = "";
+  inputCardLink.value = "";
   //добавим карточку в массив
   renderGalleryItem(createCard(newplace), gallery);
   closeAddPlacePopup();
@@ -182,20 +183,18 @@ addPlaceForm.addEventListener("submit", formAddPlaceSubmit);
 /*Открытие попапа с увеличенной картинкой*/
 const popupBigImage = document.querySelector(".popup_big-image");
 const showBigImageCloseButton = popupBigImage.querySelector(".popup__close-btn");
+const imageOnForm = popupBigImage.querySelector(".popup__big-image");
+const imageCaption = popupBigImage.querySelector(".popup__image-caption");
 
 function showBigImage(evt) {
-  const imageOnForm = popupBigImage.querySelector(".popup__big-image");
   imageOnForm.src = evt.target.src;
   imageOnForm.alt = evt.target.alt;
-  const imageCaption = popupBigImage.querySelector(".popup__image-caption");
   imageCaption.textContent = evt.target.alt;
-  popupBigImage.classList.add("popup_opened");
   openPopup(popupBigImage);
 }
 
 /*Функция закрывает попап большой картинка*/
 function closeBigImagePopup() {
-  popupBigImage.classList.remove("popup_opened");
   closePopup(popupBigImage);
 }
 
