@@ -1,28 +1,27 @@
+/*Блок работы с попапом редактирования профиля*/
 const profile = document.querySelector(".profile");
 const profieNameEditButton = profile.querySelector(".profile__name-edit-btn");
 const popupEditProfile = document.querySelector(".popup_edit-profile");
 const editProfileCloseButton = popupEditProfile.querySelector(".popup__close-btn");
 const editProfileForm = popupEditProfile.querySelector(".popup__form");
+const profileNameValue = profile.querySelector(".profile__name");
+const profileAboutValue = profile.querySelector(".profile__about-me");
+const inputName = popupEditProfile.querySelector(".popup__input_type_name");
+const inputAbout = popupEditProfile.querySelector(".popup__input_type_about");
 
 /*Функция открывает попап редактирования профиля*/
 function openEditProfilePopup() {
-  const popupEditProfile = document.querySelector(".popup_edit-profile");
   popupEditProfile.classList.add("popup_opened");
   fillProfilePopupValues();
 }
 
 /*Функция закрывает попап редактирования профиля*/
 function closeEditProfilePopup() {
-  const popupEditProfile = document.querySelector(".popup_edit-profile");
   popupEditProfile.classList.remove("popup_opened");
 }
 
 /*Функция наполнения полей попапа редактирования профиля текщеми значениями из html*/
 function fillProfilePopupValues() {
-  const profileNameValue = profile.querySelector(".profile__name");
-  const profileAboutValue = profile.querySelector(".profile__about-me");
-  const inputName = popupEditProfile.querySelector(".popup__input_type_name");
-  const inputAbout = popupEditProfile.querySelector(".popup__input_type_about");
   inputName.value = profileNameValue.textContent;
   inputAbout.value = profileAboutValue.textContent;
 }
@@ -30,10 +29,6 @@ function fillProfilePopupValues() {
 /*Функция подтверждения данных из формы*/
 function formEditProfileSubmit(evt) {
   evt.preventDefault();
-  const profileNameValue = profile.querySelector(".profile__name");
-  const profileAboutValue = profile.querySelector(".profile__about-me");
-  const inputName = popupEditProfile.querySelector(".popup__input_type_name");
-  const inputAbout = popupEditProfile.querySelector(".popup__input_type_about");
   profileNameValue.textContent = inputName.value;
   profileAboutValue.textContent = inputAbout.value;
   closeEditProfilePopup();
@@ -80,12 +75,14 @@ const cards = initialCards.slice();
 const gallery = document.querySelector('.gallery');
 const galleryItemTemplate = document.querySelector('#gallery__item').content;
 
+//Создание слушателей
 function setEventListenersOnGalleryItems(galleryItem) {
   galleryItem.querySelector(".gallery__delete-icon").addEventListener("click", deleteCard);
   galleryItem.querySelector(".gallery__heart").addEventListener("click", setLike);
   galleryItem.querySelector(".gallery__image").addEventListener("click", showBigImage);
 }
 
+//Удаление слушателей
 function removeEventListenersOnGalleryItems(galleryItem) {
   galleryItem.querySelector(".gallery__delete-icon").removeEventListener("click", deleteCard);
   galleryItem.querySelector(".gallery__heart").removeEventListener("click", setLike);
@@ -129,13 +126,11 @@ const addPlaceForm = popupNewPlace.querySelector(".popup__form");
 
 /*Функция открывает попап добавления места*/
 function openAddPlacePopup() {
-  const popupNewPlace = document.querySelector(".popup_new-place");
   popupNewPlace.classList.add("popup_opened");
 }
 
 /*Функция закрывает попап добавления места*/
 function closeAddPlacePopup() {
-  const popupNewPlace = document.querySelector(".popup_new-place");
   popupNewPlace.classList.remove("popup_opened");
 }
 
@@ -179,7 +174,6 @@ const popupBigImage = document.querySelector(".popup_big-image");
 const showBigImageCloseButton = popupBigImage.querySelector(".popup__close-btn");
 
 function showBigImage(evt) {
-  const popupBigImage = document.querySelector(".popup_big-image");
   const imageOnForm = popupBigImage.querySelector(".popup__big-image");
   imageOnForm.src = evt.target.src;
   imageOnForm.alt = evt.target.alt;
@@ -188,10 +182,11 @@ function showBigImage(evt) {
   popupBigImage.classList.add("popup_opened");
 }
 
-/*Слушатель на закрытие попапа отображения большой картинки*/
-showBigImageCloseButton.addEventListener("click", closeBigImagePopup);
-
 /*Функция закрывает попап большой картинка*/
 function closeBigImagePopup() {
   popupBigImage.classList.remove("popup_opened");
 }
+
+/*Слушатель на закрытие попапа отображения большой картинки*/
+showBigImageCloseButton.addEventListener("click", closeBigImagePopup);
+
