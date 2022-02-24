@@ -1,28 +1,28 @@
 /*Список карточек в начальном состоянии*/
 const initialCards = [{
-  name: "Архыз",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-},
-{
-  name: "Челябинская область",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-},
-{
-  name: "Иваново",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-},
-{
-  name: "Камчатка",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-},
-{
-  name: "Холмогорский район",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-},
-{
-  name: "Байкал",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-}
+    name: "Архыз",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+  },
+  {
+    name: "Челябинская область",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+  },
+  {
+    name: "Иваново",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+  },
+  {
+    name: "Камчатка",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
+  },
+  {
+    name: "Холмогорский район",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
+  },
+  {
+    name: "Байкал",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+  }
 ];
 
 /*Блок работы с попапом редактирования профиля*/
@@ -103,20 +103,27 @@ function setLike(evt) {
   evt.target.classList.toggle("gallery__heart_active");
 }
 
-function renderGalleryItem(item) {
+function createCard(item) {
   // клонируем содержимое тега template
-  const galleryItem = galleryItemTemplate.querySelector('.gallery__item').cloneNode(true);
+  const galleryItem = galleryItemTemplate.querySelector(".gallery__item").cloneNode(true);
   // наполняем содержимым
-  galleryItem.querySelector('.gallery__image').src = item.link;
-  galleryItem.querySelector('.gallery__image').alt = item.name;
-  galleryItem.querySelector('.gallery__place-name').textContent = item.name;
+  galleryItem.querySelector(".gallery__image").src = item.link;
+  galleryItem.querySelector(".gallery__image").alt = item.name;
+  galleryItem.querySelector(".gallery__place-name").textContent = item.name;
+  //создаем слушателей на карточке
   setEventListenersOnGalleryItems(galleryItem);
-  // отображаем на странице
-  gallery.append(galleryItem);
+  return galleryItem;
+}
+
+function renderGalleryItem(card, container, place = 'before') {
+  if (place === 'after') container.append(card)
+  else container.prepend(card);
 }
 
 function renderGallery() {
-  cards.forEach(renderGalleryItem);
+  initialCards.forEach(item => {
+    renderGalleryItem(createCard(item), gallery, 'after');
+  })
 }
 
 /*Функция удаления карточки*/
@@ -126,6 +133,7 @@ function deleteCard(evt) {
   cardElement.remove();
 }
 
+/*Отрисовка галлереи в начальном состоянии*/
 renderGallery();
 
 /*Отображение формы для новой карточки*/
@@ -158,10 +166,8 @@ function formAddPlaceSubmit(evt) {
   inputName.value = "";
   inputLink.value = "";
   //добавим карточку в массив
-  cards.unshift(newplace);
+  renderGalleryItem(createCard(newplace), gallery);
   closeAddPlacePopup();
-  removeOldCards();
-  renderGallery();
 }
 
 /*Обработчики попапа на добавление нового места*/
@@ -172,12 +178,6 @@ placeAddButton.addEventListener("click", openAddPlacePopup);
 addPlaceCloseButton.addEventListener("click", closeAddPlacePopup);
 /*Слушатель на подтверждение формы*/
 addPlaceForm.addEventListener("submit", formAddPlaceSubmit);
-
-function removeOldCards() {
-  const cardElements = gallery.querySelectorAll(".gallery__item");
-  const cardElementsArray = Array.from(cardElements);
-  cardElementsArray.forEach(item => item.remove());
-}
 
 /*Открытие попапа с увеличенной картинкой*/
 const popupBigImage = document.querySelector(".popup_big-image");
@@ -201,4 +201,3 @@ function closeBigImagePopup() {
 
 /*Слушатель на закрытие попапа отображения большой картинки*/
 showBigImageCloseButton.addEventListener("click", closeBigImagePopup);
-
