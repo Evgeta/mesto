@@ -1,4 +1,4 @@
-# Проект: Учебный проект Яндекс.Практикума. Спринт 5. Место.
+# Проект: Учебный проект Яндекс.Практикума. Спринт 6. Место.
 ### Обзор
 * Описание проекта
 * Технологии
@@ -22,12 +22,13 @@
 * Позиционирование элементов
 * Основы JS
 * Работа с DOM
+* Валидация форм
 
 **Figma**
 
 Проект сделан по следующему макету:
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=0%3A1)
+* [Ссылка на макет в Figma](https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6?node-id=1140%3A291)
 
 Чеклист по проекту [Чеклист](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-5.pdf)
 
