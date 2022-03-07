@@ -23,14 +23,15 @@
 * Основы JS
 * Работа с DOM
 * Валидация форм
+* Улучшен UX при работе с попапами
 
 **Figma**
 
 Проект сделан по следующему макету:
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6?node-id=1140%3A291)
+* [Ссылка на макет в Figma](https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6?node-id=0%3A1)
 
-Чеклист по проекту [Чеклист](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-5.pdf)
+Чеклист по проекту [Чеклист](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-6.pdf)
 
 [Ссылка на проект](https://evgeta.github.io/mesto/)
 
