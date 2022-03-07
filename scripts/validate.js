@@ -60,8 +60,6 @@ const setEventListeners = (formElement, validationObject) => {
 
 const enableValidation = (validationObject) => {
 
-  console.log(validationObject.formSelector);
-
   //Формируем массив форм документа. Критерий выбора - класс формы
   const formList = Array.from(document.querySelectorAll(validationObject.formSelector));
 

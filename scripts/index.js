@@ -174,3 +174,22 @@ function closeBigImagePopup() {
 
 /*Слушатель на закрытие попапа отображения большой картинки*/
 showBigImageCloseButton.addEventListener("click", closeBigImagePopup);
+
+
+const addCloseFormOnClickOwerlay = (popupSelector) => {
+
+  //Формируем массив форм документа. Критерий выбора - класс формы
+  const popupList = Array.from(document.querySelectorAll(popupSelector));
+
+  /*Для каждой формы добавляем слушатель на оверлей*/
+  popupList.forEach((popupElement) => {
+    popupElement.addEventListener('click', function (evt) {
+      closePopup(evt.target);
+    });
+  });
+};
+
+addCloseFormOnClickOwerlay('.popup');
+
+
+
