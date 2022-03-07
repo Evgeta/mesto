@@ -5,3 +5,7 @@
   background-color: #FFFFFF;
   cursor: not-allowed;
 }
+
+.popup__button_disabled:hover {
+  background-color: #FFFFFF;
+}

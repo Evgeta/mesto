@@ -33,15 +33,17 @@ const hasInvalidInput = (inputList) => {
 const toggleButtonState = (inputList, buttonElement, classname) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(classname);
+    buttonElement.disabled = true;
   } else {
     buttonElement.classList.remove(classname);
+    buttonElement.disabled = false;
   }
 }
 
 const setEventListeners = (formElement, validationObject) => {
   //формируем список input-элементов небора полей
   const inputList = Array.from(formElement.querySelectorAll(validationObject.inputSelector));
-    //получает ссылку на кнопку подтверждения
+  //получает ссылку на кнопку подтверждения
   const buttonElement = formElement.querySelector(validationObject.submitButtonSelector);
 
   // чтобы проверить состояние кнопки в самом начале
@@ -55,7 +57,6 @@ const setEventListeners = (formElement, validationObject) => {
     });
   });
 };
-
 
 const enableValidation = (validationObject) => {
 
