@@ -1,24 +1,24 @@
-const showInputError = (formElement, inputElement, errorMessage) => {
+const showInputError = (formElement, inputElement, errorMessage, validationObject) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('popup__input_type_error');
+  inputElement.classList.add(validationObject.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__error_visible');
+  errorElement.classList.add(validationObject.errorClass);
 };
 
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement, validationObject) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('popup__input_type_error');
-  errorElement.classList.remove('popup__error_visible');
+  inputElement.classList.remove(validationObject.inputErrorClass);
+  errorElement.classList.remove(validationObject.errorClass);
   errorElement.textContent = '';
 };
 
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, validationObject) => {
   if (!inputElement.validity.valid) {
     /*если в элемент введены не валидные данные - отображаем ошибку*/
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, validationObject);
   } else {
     /*если в элемент введены валидные данные - скрываем ошибку*/
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, validationObject);
   }
 };
 
@@ -30,28 +30,28 @@ const hasInvalidInput = (inputList) => {
   });
 }
 
-const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (inputList, buttonElement, classname) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add('popup__button_disabled');
+    buttonElement.classList.add(classname);
   } else {
-    buttonElement.classList.remove('popup__button_disabled');
+    buttonElement.classList.remove(classname);
   }
 }
 
-const setEventListeners = (formElement) => {
+const setEventListeners = (formElement, validationObject) => {
   //формируем список input-элементов небора полей
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  //получает ссылку на кнопку подтверждения
-  const buttonElement = formElement.querySelector('.popup__button');
+  const inputList = Array.from(formElement.querySelectorAll(validationObject.inputSelector));
+    //получает ссылку на кнопку подтверждения
+  const buttonElement = formElement.querySelector(validationObject.submitButtonSelector);
 
   // чтобы проверить состояние кнопки в самом начале
-  toggleButtonState(inputList, buttonElement);
+  toggleButtonState(inputList, buttonElement, validationObject.inactiveButtonClass);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
-      checkInputValidity(formElement, inputElement);
+      checkInputValidity(formElement, inputElement, validationObject);
       // чтобы проверять его при изменении любого из полей
-      toggleButtonState(inputList, buttonElement);
+      toggleButtonState(inputList, buttonElement, validationObject.inactiveButtonClass);
     });
   });
 };
@@ -62,7 +62,7 @@ const enableValidation = (validationObject) => {
   console.log(validationObject.formSelector);
 
   //Формируем массив форм документа. Критерий выбора - класс формы
-  const formList = Array.from(document.querySelectorAll('.popup__form'));
+  const formList = Array.from(document.querySelectorAll(validationObject.formSelector));
 
   /*Для каждой формы отключаем поведение по умолчанию*/
   formList.forEach((formElement) => {
@@ -73,7 +73,7 @@ const enableValidation = (validationObject) => {
     /*Для каждого набора полей устанавливаем слушателей*/
     const fieldsetList = Array.from(formElement.querySelectorAll('.popup__fieldset'));
     fieldsetList.forEach((fieldSet) => {
-      setEventListeners(fieldSet);
+      setEventListeners(fieldSet, validationObject);
     });
   });
 };
