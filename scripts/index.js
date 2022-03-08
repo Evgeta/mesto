@@ -1,4 +1,3 @@
-
 /*Блок работы с попапом редактирования профиля*/
 const profile = document.querySelector(".profile");
 const profieNameEditButton = profile.querySelector(".profile__name-edit-btn");
@@ -10,14 +9,34 @@ const profileAboutValue = profile.querySelector(".profile__about-me");
 const inputName = popupEditProfile.querySelector(".popup__input_type_name");
 const inputAbout = popupEditProfile.querySelector(".popup__input_type_about");
 
+//Закрытие попапа при нажатии Escape
+function keyDown(evt) {
+  if (evt.key === 'Escape') {
+    closePopup(document.querySelector('.popup_opened'));
+  }
+}
+
+
+//Добавление слушателя на нажатие клавиш
+function addEscapeListner() {
+  document.addEventListener('keydown', keyDown);
+}
+
+//Удаление слушателя на нажатие клавиш
+function removeEscapeListner() {
+  document.removeEventListener('keydown', keyDown);
+}
+
 /*Функция открытия попапа*/
 function openPopup(popup) {
   popup.classList.add("popup_opened");
+  addEscapeListner();
 }
 
 /*Функция закрытия попапа*/
 function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  removeEscapeListner();
 }
 
 /*Функция открывает попап редактирования профиля*/
@@ -176,6 +195,8 @@ function closeBigImagePopup() {
 showBigImageCloseButton.addEventListener("click", closeBigImagePopup);
 
 
+/*Реализация закрытия попапа по нажатию на оверлэй*/
+
 const addCloseFormOnClickOwerlay = (popupSelector) => {
 
   //Формируем массив форм документа. Критерий выбора - класс формы
@@ -190,6 +211,3 @@ const addCloseFormOnClickOwerlay = (popupSelector) => {
 };
 
 addCloseFormOnClickOwerlay('.popup');
-
-
-
