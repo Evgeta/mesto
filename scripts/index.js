@@ -28,11 +28,13 @@ function removeEscapeListner() {
 
 /*Функция открытия попапа*/
 function openPopup(popup) {
-  popup.classList.add("popup_opened");
-  addEscapeListner();
-    //если это попап профиля
+  //если это попап профиля пользователя
   if(popup.classList.contains('popup_edit-profile'))
-   {fillProfilePopupValues()};
+    {fillProfilePopupValues()};
+
+    popup.classList.add("popup_opened");
+  addEscapeListner();
+
 }
 
 /*Функция закрытия попапа*/
@@ -44,7 +46,6 @@ function closePopup(popup) {
 /*Функция открывает попап редактирования профиля*/
 function openEditProfilePopup() {
   openPopup(popupEditProfile);
-  fillProfilePopupValues();
 }
 
 /*Функция закрывает попап редактирования профиля*/
