@@ -16,7 +16,6 @@ function keyDown(evt) {
   }
 }
 
-
 //Добавление слушателя на нажатие клавиш
 function addEscapeListner() {
   document.addEventListener('keydown', keyDown);
@@ -31,6 +30,9 @@ function removeEscapeListner() {
 function openPopup(popup) {
   popup.classList.add("popup_opened");
   addEscapeListner();
+    //если это попап профиля
+  if(popup.classList.contains('popup_edit-profile'))
+   {fillProfilePopupValues()};
 }
 
 /*Функция закрытия попапа*/

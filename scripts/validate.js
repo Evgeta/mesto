@@ -30,18 +30,26 @@ const hasInvalidInput = (inputList) => {
   });
 }
 
+const enableButton = (button) => {
+  button.disabled = false;
+};
+
+const disableButton = (button) => {
+  button.disabled = true;
+};
+
 const toggleButtonState = (inputList, buttonElement, classname) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(classname);
-    buttonElement.disabled = true;
+    disableButton(buttonElement);
   } else {
     buttonElement.classList.remove(classname);
-    buttonElement.disabled = false;
+    enableButton(buttonElement);
   }
 }
 
 const setEventListeners = (formElement, validationObject) => {
-  //формируем список input-элементов небора полей
+  //формируем список input-элементов набора полей
   const inputList = Array.from(formElement.querySelectorAll(validationObject.inputSelector));
   //получает ссылку на кнопку подтверждения
   const buttonElement = formElement.querySelector(validationObject.submitButtonSelector);
@@ -76,7 +84,6 @@ const enableValidation = (validationObject) => {
     });
   });
 };
-
 
 // включение валидации вызовом enableValidation
 // все настройки передаются при вызове
