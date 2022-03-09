@@ -10,7 +10,7 @@ const inputName = popupEditProfile.querySelector(".popup__input_type_name");
 const inputAbout = popupEditProfile.querySelector(".popup__input_type_about");
 
 //Закрытие попапа при нажатии Escape
-function keyDown(evt) {
+function handleEscapeKey(evt) {
   if (evt.key === 'Escape') {
     closePopup(document.querySelector('.popup_opened'));
   }
@@ -18,23 +18,18 @@ function keyDown(evt) {
 
 //Добавление слушателя на нажатие клавиш
 function addEscapeListner() {
-  document.addEventListener('keydown', keyDown);
+  document.addEventListener('keydown', handleEscapeKey);
 }
 
 //Удаление слушателя на нажатие клавиш
 function removeEscapeListner() {
-  document.removeEventListener('keydown', keyDown);
+  document.removeEventListener('keydown', handleEscapeKey);
 }
 
 /*Функция открытия попапа*/
 function openPopup(popup) {
-  //если это попап профиля пользователя
-  if(popup.classList.contains('popup_edit-profile'))
-    {fillProfilePopupValues()};
-
-    popup.classList.add("popup_opened");
+  popup.classList.add("popup_opened");
   addEscapeListner();
-
 }
 
 /*Функция закрытия попапа*/
@@ -45,6 +40,7 @@ function closePopup(popup) {
 
 /*Функция открывает попап редактирования профиля*/
 function openEditProfilePopup() {
+  fillProfilePopupValues();
   openPopup(popupEditProfile);
 }
 
@@ -60,7 +56,7 @@ function fillProfilePopupValues() {
 }
 
 /*Функция подтверждения данных из формы*/
-function formEditProfileSubmit(evt) {
+function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileNameValue.textContent = inputName.value;
   profileAboutValue.textContent = inputAbout.value;
@@ -72,7 +68,7 @@ profieNameEditButton.addEventListener("click", openEditProfilePopup);
 /*Слушатель на закрытие попапа*/
 editProfileCloseButton.addEventListener("click", closeEditProfilePopup);
 /*Слушатель на подтверждение формы*/
-editProfileForm.addEventListener("submit", formEditProfileSubmit);
+editProfileForm.addEventListener("submit", handleProfileFormSubmit);
 
 /*Блок динамического добавления карточек*/
 
@@ -103,8 +99,11 @@ function createCard(item) {
   // клонируем содержимое тега template
   const galleryItem = galleryItemTemplate.querySelector(".gallery__item").cloneNode(true);
   // наполняем содержимым
-  galleryItem.querySelector(".gallery__image").src = item.link;
-  galleryItem.querySelector(".gallery__image").alt = item.name;
+  const galleryItemImage = galleryItem.querySelector(".gallery__image");
+
+  galleryItemImage.src = item.link;
+  galleryItemImage.alt = item.name;
+
   galleryItem.querySelector(".gallery__place-name").textContent = item.name;
   //создаем слушателей на карточке
   setEventListenersOnGalleryItems(galleryItem);
@@ -152,7 +151,8 @@ const inputCardName = popupNewPlace.querySelector(".popup__input_type_name");
 const inputCardLink = popupNewPlace.querySelector(".popup__input_type_link");
 
 /*Функция подтверждения данных из формы добавления*/
-function formAddPlaceSubmit(evt) {
+
+function handleAddPlaceFormSubmit(evt) {
   evt.preventDefault();
   const newplace = {
     name: "",
@@ -160,9 +160,9 @@ function formAddPlaceSubmit(evt) {
   }
   newplace.name = inputCardName.value;
   newplace.link = inputCardLink.value;
-  inputCardName.value = "";
-  inputCardLink.value = "";
-  //добавим карточку в массив
+  addPlaceForm.reset();
+
+  //добавим карточку
   renderGalleryItem(createCard(newplace), gallery);
   closeAddPlacePopup();
 }
@@ -174,7 +174,7 @@ placeAddButton.addEventListener("click", openAddPlacePopup);
 /*Слушатель на закрытие попапа*/
 addPlaceCloseButton.addEventListener("click", closeAddPlacePopup);
 /*Слушатель на подтверждение формы*/
-addPlaceForm.addEventListener("submit", formAddPlaceSubmit);
+addPlaceForm.addEventListener("submit", handleAddPlaceFormSubmit);
 
 /*Открытие попапа с увеличенной картинкой*/
 const popupBigImage = document.querySelector(".popup_big-image");
