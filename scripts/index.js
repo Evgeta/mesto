@@ -2,7 +2,6 @@
 const profile = document.querySelector(".profile");
 const profieNameEditButton = profile.querySelector(".profile__name-edit-btn");
 const popupEditProfile = document.querySelector(".popup_edit-profile");
-const editProfileCloseButton = popupEditProfile.querySelector(".popup__close-btn");
 const editProfileForm = popupEditProfile.querySelector(".popup__form");
 const profileNameValue = profile.querySelector(".profile__name");
 const profileAboutValue = profile.querySelector(".profile__about-me");
@@ -65,8 +64,7 @@ function handleProfileFormSubmit(evt) {
 
 /*Слушатель на всплывание попапа*/
 profieNameEditButton.addEventListener("click", openEditProfilePopup);
-/*Слушатель на закрытие попапа*/
-editProfileCloseButton.addEventListener("click", closeEditProfilePopup);
+
 /*Слушатель на подтверждение формы*/
 editProfileForm.addEventListener("submit", handleProfileFormSubmit);
 
@@ -100,10 +98,8 @@ function createCard(item) {
   const galleryItem = galleryItemTemplate.querySelector(".gallery__item").cloneNode(true);
   // наполняем содержимым
   const galleryItemImage = galleryItem.querySelector(".gallery__image");
-
   galleryItemImage.src = item.link;
   galleryItemImage.alt = item.name;
-
   galleryItem.querySelector(".gallery__place-name").textContent = item.name;
   //создаем слушателей на карточке
   setEventListenersOnGalleryItems(galleryItem);
@@ -134,7 +130,6 @@ renderGallery();
 /*Отображение формы для новой карточки*/
 const placeAddButton = profile.querySelector(".profile__add-btn");
 const popupNewPlace = document.querySelector(".popup_new-place");
-const addPlaceCloseButton = popupNewPlace.querySelector(".popup__close-btn");
 const addPlaceForm = popupNewPlace.querySelector(".popup__form");
 
 /*Функция открывает попап добавления места*/
@@ -143,9 +138,9 @@ function openAddPlacePopup() {
 }
 
 /*Функция закрывает попап добавления места*/
-function closeAddPlacePopup() {
-  closePopup(popupNewPlace);
-}
+ function closeAddPlacePopup() {
+   closePopup(popupNewPlace);
+ }
 
 const inputCardName = popupNewPlace.querySelector(".popup__input_type_name");
 const inputCardLink = popupNewPlace.querySelector(".popup__input_type_link");
@@ -172,8 +167,7 @@ function handleAddPlaceFormSubmit(evt) {
 
 /*Слушатель на всплывание попапа на добавление места*/
 placeAddButton.addEventListener("click", openAddPlacePopup);
-/*Слушатель на закрытие попапа*/
-addPlaceCloseButton.addEventListener("click", closeAddPlacePopup);
+
 /*Слушатель на подтверждение формы*/
 addPlaceForm.addEventListener("submit", handleAddPlaceFormSubmit);
 
@@ -190,30 +184,22 @@ function showBigImage(evt) {
   openPopup(popupBigImage);
 }
 
-/*Функция закрывает попап большой картинка*/
-function closeBigImagePopup() {
-  closePopup(popupBigImage);
-}
+/*Реализация закрытия попапа по нажатию на оверлэй и закрытия по нажатию на крестик*/
+const handleMouseDownOnOverlayAndCrossButton = (popupSelector) => {
 
-/*Слушатель на закрытие попапа отображения большой картинки*/
-showBigImageCloseButton.addEventListener("click", closeBigImagePopup);
-
-
-/*Реализация закрытия попапа по нажатию на оверлэй*/
-
-const addCloseFormOnClickOwerlay = (popupSelector) => {
-
-  //Формируем массив форм документа. Критерий выбора - класс формы
+//Формируем массив форм документа. Критерий выбора - класс формы
   const popupList = Array.from(document.querySelectorAll(popupSelector));
 
-  /*Для каждой формы добавляем слушатель на оверлей*/
   popupList.forEach((popupElement) => {
-    popupElement.addEventListener('click', function (evt) {
-      if (evt.target === evt.currentTarget) {
-        closePopup(evt.target);
+    popupElement.addEventListener('mousedown', (evt) => {
+      if (evt.target.classList.contains('popup_opened')) { //обработка нажатия левой кнопки мыши по оверлею
+        closePopup(popupElement);
+      }
+      if (evt.target.classList.contains('popup__close-btn')) { //обработка нажатия левой кнопки мыши по кнопке-крестику
+        closePopup(popupElement)
       }
     });
-  });
-};
+  })
+}
 
-addCloseFormOnClickOwerlay('.popup');
+handleMouseDownOnOverlayAndCrossButton('.popup');
