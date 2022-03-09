@@ -165,6 +165,7 @@ function handleAddPlaceFormSubmit(evt) {
   //добавим карточку
   renderGalleryItem(createCard(newplace), gallery);
   closeAddPlacePopup();
+  disableButton(addPlaceForm.querySelector(".popup__button"), 'popup__button_disabled');
 }
 
 /*Обработчики попапа на добавление нового места*/
@@ -208,7 +209,9 @@ const addCloseFormOnClickOwerlay = (popupSelector) => {
   /*Для каждой формы добавляем слушатель на оверлей*/
   popupList.forEach((popupElement) => {
     popupElement.addEventListener('click', function (evt) {
-      closePopup(evt.target);
+      if (evt.target === evt.currentTarget) {
+        closePopup(evt.target);
+      }
     });
   });
 };
