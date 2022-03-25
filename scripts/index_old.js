@@ -1,36 +1,3 @@
-import {Card} from "./Card.js";
-
-
-
-/*Список карточек в начальном состоянии*/
-const initialCards = [{
-  name: "Архыз",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-},
-{
-  name: "Челябинская область",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-},
-{
-  name: "Иваново",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-},
-{
-  name: "Камчатка",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-},
-{
-  name: "Холмогорский район",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-},
-{
-  name: "Байкал",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-}
-];
-
-
-
 /*Блок работы с попапом редактирования профиля*/
 const profile = document.querySelector(".profile");
 const profieNameEditButton = profile.querySelector(".profile__name-edit-btn");
@@ -59,7 +26,7 @@ function removeEscapeListner() {
 }
 
 /*Функция открытия попапа*/
-export function openPopup(popup) {
+function openPopup(popup) {
   popup.classList.add("popup_opened");
   addEscapeListner();
 }
@@ -104,41 +71,40 @@ editProfileForm.addEventListener("submit", handleProfileFormSubmit);
 /*Блок динамического добавления карточек*/
 
 /*Список карточек после возможной модификации*/
-//const cards = initialCards.slice();
+const cards = initialCards.slice();
 const gallery = document.querySelector('.gallery');
-//const galleryItemTemplate = document.querySelector('#gallery__item').content;
+const galleryItemTemplate = document.querySelector('#gallery__item').content;
 
 //Создание слушателей
-// function setEventListenersOnGalleryItems(galleryItem) {
-//   galleryItem.querySelector(".gallery__delete-icon").addEventListener("click", deleteCard);
-//   galleryItem.querySelector(".gallery__heart").addEventListener("click", setLike);
-//   galleryItem.querySelector(".gallery__image").addEventListener("click", showBigImage);
-// }
+function setEventListenersOnGalleryItems(galleryItem) {
+  galleryItem.querySelector(".gallery__delete-icon").addEventListener("click", deleteCard);
+  galleryItem.querySelector(".gallery__heart").addEventListener("click", setLike);
+  galleryItem.querySelector(".gallery__image").addEventListener("click", showBigImage);
+}
 
 //Удаление слушателей
-// function removeEventListenersOnGalleryItems(galleryItem) {
-//   galleryItem.querySelector(".gallery__delete-icon").removeEventListener("click", deleteCard);
-//   galleryItem.querySelector(".gallery__heart").removeEventListener("click", setLike);
-//   galleryItem.querySelector(".gallery__image").removeEventListener("click", showBigImage);
-// }
+function removeEventListenersOnGalleryItems(galleryItem) {
+  galleryItem.querySelector(".gallery__delete-icon").removeEventListener("click", deleteCard);
+  galleryItem.querySelector(".gallery__heart").removeEventListener("click", setLike);
+  galleryItem.querySelector(".gallery__image").removeEventListener("click", showBigImage);
+}
 
-// function setLike(evt) {
-//   evt.target.classList.toggle("gallery__heart_active");
-// }
+function setLike(evt) {
+  evt.target.classList.toggle("gallery__heart_active");
+}
 
-//function createCard(item) {
+function createCard(item) {
   // клонируем содержимое тега template
-  //const galleryItem = galleryItemTemplate.querySelector(".gallery__item").cloneNode(true);
+  const galleryItem = galleryItemTemplate.querySelector(".gallery__item").cloneNode(true);
   // наполняем содержимым
-  //const galleryItemImage = galleryItem.querySelector(".gallery__image");
-  //galleryItemImage.src = item.link;
-  //galleryItemImage.alt = item.name;
-  //galleryItem.querySelector(".gallery__place-name").textContent = item.name;
+  const galleryItemImage = galleryItem.querySelector(".gallery__image");
+  galleryItemImage.src = item.link;
+  galleryItemImage.alt = item.name;
+  galleryItem.querySelector(".gallery__place-name").textContent = item.name;
   //создаем слушателей на карточке
-  //setEventListenersOnGalleryItems(galleryItem);
-  //return galleryItem;
-//}
-
+  setEventListenersOnGalleryItems(galleryItem);
+  return galleryItem;
+}
 
 function renderGalleryItem(card, container, place = 'before') {
   if (place === 'after') container.append(card)
@@ -147,18 +113,16 @@ function renderGalleryItem(card, container, place = 'before') {
 
 function renderGallery() {
   initialCards.forEach(item => {
-      const newCard = new Card(item.name, item.link, '#gallery__item');
-      const galleryItem = newCard.getElement();
-      renderGalleryItem(galleryItem, gallery, 'after');
+    renderGalleryItem(createCard(item), gallery, 'after');
   })
 }
 
 /*Функция удаления карточки*/
-//function deleteCard(evt) {
-//  const cardElement = evt.target.closest(".gallery__item");
-//  removeEventListenersOnGalleryItems(cardElement);
-//  cardElement.remove();
-//}
+function deleteCard(evt) {
+  const cardElement = evt.target.closest(".gallery__item");
+  removeEventListenersOnGalleryItems(cardElement);
+  cardElement.remove();
+}
 
 /*Отрисовка галлереи в начальном состоянии*/
 renderGallery();
@@ -208,17 +172,17 @@ placeAddButton.addEventListener("click", openAddPlacePopup);
 addPlaceForm.addEventListener("submit", handleAddPlaceFormSubmit);
 
 /*Открытие попапа с увеличенной картинкой*/
-//const popupBigImage = document.querySelector(".popup_big-image");
-//const showBigImageCloseButton = popupBigImage.querySelector(".popup__close-btn");
-//const imageOnForm = popupBigImage.querySelector(".popup__big-image");
-//const imageCaption = popupBigImage.querySelector(".popup__image-caption");
+const popupBigImage = document.querySelector(".popup_big-image");
+const showBigImageCloseButton = popupBigImage.querySelector(".popup__close-btn");
+const imageOnForm = popupBigImage.querySelector(".popup__big-image");
+const imageCaption = popupBigImage.querySelector(".popup__image-caption");
 
-// export function showBigImage(evt) {
-//   imageOnForm.src = evt.target.src;
-//   imageOnForm.alt = evt.target.alt;
-//   imageCaption.textContent = evt.target.alt;
-//   openPopup(popupBigImage);
-// }
+function showBigImage(evt) {
+  imageOnForm.src = evt.target.src;
+  imageOnForm.alt = evt.target.alt;
+  imageCaption.textContent = evt.target.alt;
+  openPopup(popupBigImage);
+}
 
 /*Реализация закрытия попапа по нажатию на оверлэй и закрытия по нажатию на крестик*/
 const handleMouseDownOnOverlayAndCrossButton = (popupSelector) => {
