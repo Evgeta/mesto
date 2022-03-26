@@ -5,6 +5,12 @@ import {
   FormValidator
 } from "./FormValidator.js";
 
+import {
+  openPopup, closePopup
+} from "./utils.js";
+
+
+
 /*Список карточек в начальном состоянии*/
 const initialCards = [{
     name: "Архыз",
@@ -41,35 +47,6 @@ const profileNameValue = profile.querySelector(".profile__name");
 const profileAboutValue = profile.querySelector(".profile__about-me");
 const inputName = popupEditProfile.querySelector(".popup__input_type_name");
 const inputAbout = popupEditProfile.querySelector(".popup__input_type_about");
-
-//Закрытие попапа при нажатии Escape
-function handleEscapeKey(evt) {
-  if (evt.key === 'Escape') {
-    closePopup(document.querySelector('.popup_opened'));
-  }
-}
-
-//Добавление слушателя на нажатие клавиш
-function addEscapeListner() {
-  document.addEventListener('keydown', handleEscapeKey);
-}
-
-//Удаление слушателя на нажатие клавиш
-function removeEscapeListner() {
-  document.removeEventListener('keydown', handleEscapeKey);
-}
-
-/*Функция открытия попапа*/
-export function openPopup(popup) {
-  popup.classList.add("popup_opened");
-  addEscapeListner();
-}
-
-/*Функция закрытия попапа*/
-function closePopup(popup) {
-  popup.classList.remove("popup_opened");
-  removeEscapeListner();
-}
 
 /*Функция открывает попап редактирования профиля*/
 function openEditProfilePopup() {
@@ -151,16 +128,19 @@ function handleAddPlaceFormSubmit(evt) {
   }
   newplace.name = inputCardName.value;
   newplace.link = inputCardLink.value;
-  addPlaceForm.reset();
 
   //добавление карточки
   const card = new Card(newplace.name, newplace.link, '#gallery__item');
   const galleryItem = card.getElement();
   renderGalleryItem(galleryItem, gallery, 'before');
-  closeAddPlacePopup();
-  disableButton(addPlaceForm.querySelector(".popup__button"), 'popup__button_disabled');
-}
 
+  //закрытие модального окна
+  closeAddPlacePopup();
+  //очистка формы
+  addPlaceForm.reset();
+  newPlaceValidator.disableButton();
+
+}
 
 /*Обработчики попапа на добавление нового места*/
 
@@ -169,11 +149,6 @@ placeAddButton.addEventListener("click", openAddPlacePopup);
 
 /*Слушатель на подтверждение формы*/
 addPlaceForm.addEventListener("submit", handleAddPlaceFormSubmit);
-
-const disableButton = (button, classname) => {
-  button.classList.add(classname);
-  button.disabled = true;
-};
 
 /*Реализация закрытия попапа по нажатию на оверлэй и закрытия по нажатию на крестик*/
 const handleMouseDownOnOverlayAndCrossButton = (popupSelector) => {
@@ -195,23 +170,22 @@ const handleMouseDownOnOverlayAndCrossButton = (popupSelector) => {
 
 handleMouseDownOnOverlayAndCrossButton('.popup');
 
-const enableValidation = (validationObject) => {
-
-  //Формируем массив форм документа. Критерий выбора - класс формы
-  const formList = Array.from(document.querySelectorAll(validationObject.formSelector));
-
-  /*Для каждой формы отключаем поведение по умолчанию*/
-  formList.forEach((formElement) => {
-    const formValidator = new FormValidator(validationObject, formElement);
-    formValidator.enableValidation();
-  });
-};
-
-enableValidation({
+const validationObject = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
   inactiveButtonClass: 'popup__button_disabled',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
-});
+}
+
+const formList = Array.from(document.querySelectorAll(validationObject.formSelector));
+const newPlaceValidator = new FormValidator(validationObject, formList[1]);
+const editProfileValidator = new FormValidator(validationObject, formList[0]);
+
+const enableValidation = () => {
+  newPlaceValidator.enableValidation();
+  editProfileValidator.enableValidation();
+};
+
+enableValidation();

@@ -8,6 +8,8 @@ export class FormValidator {
     this._errorClass = validationSettings.errorClass;
     //элемент той формы, которая валидируется
     this._formElement = formElement;
+
+    this._button = this._formElement.querySelector(".popup__button");
   }
 
   _showInputError(inputElement, errorMessage) {
@@ -42,19 +44,19 @@ export class FormValidator {
     });
   }
 
-  _enableButton = (button) => {
-    button.classList.remove(this._inactiveButtonClass);
-    button.disabled = false;
+  _enableButton = () => {
+    this._button.classList.remove(this._inactiveButtonClass);
+    this._button.disabled = false;
   };
 
-  _disableButton = (button) => {
-    button.classList.add(this._inactiveButtonClass);
-    button.disabled = true;
+  disableButton = () => {
+    this._button.classList.add(this._inactiveButtonClass);
+    this._button.disabled = true;
   };
 
   _toggleButtonState = (inputList, buttonElement) => {
     if (this._hasInvalidInput(inputList)) {
-      this._disableButton(buttonElement, this._inactiveButtonClass);
+      this.disableButton(buttonElement, this._inactiveButtonClass);
     } else {
       this._enableButton(buttonElement, this._inactiveButtonClass);
     }
