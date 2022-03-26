@@ -1,36 +1,36 @@
-import {Card} from "./Card.js";
-import {FormValidator} from "./FormValidator.js";
-
-
+import {
+  Card
+} from "./Card.js";
+import {
+  FormValidator
+} from "./FormValidator.js";
 
 /*Список карточек в начальном состоянии*/
 const initialCards = [{
-  name: "Архыз",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-},
-{
-  name: "Челябинская область",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-},
-{
-  name: "Иваново",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-},
-{
-  name: "Камчатка",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-},
-{
-  name: "Холмогорский район",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-},
-{
-  name: "Байкал",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-}
+    name: "Архыз",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+  },
+  {
+    name: "Челябинская область",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+  },
+  {
+    name: "Иваново",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+  },
+  {
+    name: "Камчатка",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
+  },
+  {
+    name: "Холмогорский район",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
+  },
+  {
+    name: "Байкал",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+  }
 ];
-
-
 
 /*Блок работы с попапом редактирования профиля*/
 const profile = document.querySelector(".profile");
@@ -104,62 +104,22 @@ editProfileForm.addEventListener("submit", handleProfileFormSubmit);
 
 /*Блок динамического добавления карточек*/
 
-/*Список карточек после возможной модификации*/
-//const cards = initialCards.slice();
 const gallery = document.querySelector('.gallery');
-//const galleryItemTemplate = document.querySelector('#gallery__item').content;
 
-//Создание слушателей
-// function setEventListenersOnGalleryItems(galleryItem) {
-//   galleryItem.querySelector(".gallery__delete-icon").addEventListener("click", deleteCard);
-//   galleryItem.querySelector(".gallery__heart").addEventListener("click", setLike);
-//   galleryItem.querySelector(".gallery__image").addEventListener("click", showBigImage);
-// }
-
-//Удаление слушателей
-// function removeEventListenersOnGalleryItems(galleryItem) {
-//   galleryItem.querySelector(".gallery__delete-icon").removeEventListener("click", deleteCard);
-//   galleryItem.querySelector(".gallery__heart").removeEventListener("click", setLike);
-//   galleryItem.querySelector(".gallery__image").removeEventListener("click", showBigImage);
-// }
-
-// function setLike(evt) {
-//   evt.target.classList.toggle("gallery__heart_active");
-// }
-
-//function createCard(item) {
-  // клонируем содержимое тега template
-  //const galleryItem = galleryItemTemplate.querySelector(".gallery__item").cloneNode(true);
-  // наполняем содержимым
-  //const galleryItemImage = galleryItem.querySelector(".gallery__image");
-  //galleryItemImage.src = item.link;
-  //galleryItemImage.alt = item.name;
-  //galleryItem.querySelector(".gallery__place-name").textContent = item.name;
-  //создаем слушателей на карточке
-  //setEventListenersOnGalleryItems(galleryItem);
-  //return galleryItem;
-//}
-
-
+//отрисовка карточки в галлерее
 function renderGalleryItem(card, container, place = 'before') {
   if (place === 'after') container.append(card)
   else container.prepend(card);
 }
 
+//отрисовка галлереи
 function renderGallery() {
   initialCards.forEach(item => {
-      const card = new Card(item.name, item.link, '#gallery__item');
-      const galleryItem = card.getElement();
-      renderGalleryItem(galleryItem, gallery, 'after');
+    const card = new Card(item.name, item.link, '#gallery__item');
+    const galleryItem = card.getElement();
+    renderGalleryItem(galleryItem, gallery, 'after');
   })
 }
-
-/*Функция удаления карточки*/
-//function deleteCard(evt) {
-//  const cardElement = evt.target.closest(".gallery__item");
-//  removeEventListenersOnGalleryItems(cardElement);
-//  cardElement.remove();
-//}
 
 /*Отрисовка галлереи в начальном состоянии*/
 renderGallery();
@@ -175,15 +135,14 @@ function openAddPlacePopup() {
 }
 
 /*Функция закрывает попап добавления места*/
- function closeAddPlacePopup() {
-   closePopup(popupNewPlace);
- }
+function closeAddPlacePopup() {
+  closePopup(popupNewPlace);
+}
 
 const inputCardName = popupNewPlace.querySelector(".popup__input_type_name");
 const inputCardLink = popupNewPlace.querySelector(".popup__input_type_link");
 
 /*Функция подтверждения данных из формы добавления*/
-
 function handleAddPlaceFormSubmit(evt) {
   evt.preventDefault();
   const newplace = {
@@ -194,11 +153,14 @@ function handleAddPlaceFormSubmit(evt) {
   newplace.link = inputCardLink.value;
   addPlaceForm.reset();
 
-  //добавим карточку
-  renderGalleryItem(createCard(newplace), gallery);
+  //добавление карточки
+  const card = new Card(newplace.name, newplace.link, '#gallery__item');
+  const galleryItem = card.getElement();
+  renderGalleryItem(galleryItem, gallery, 'before');
   closeAddPlacePopup();
   disableButton(addPlaceForm.querySelector(".popup__button"), 'popup__button_disabled');
 }
+
 
 /*Обработчики попапа на добавление нового места*/
 
@@ -208,23 +170,15 @@ placeAddButton.addEventListener("click", openAddPlacePopup);
 /*Слушатель на подтверждение формы*/
 addPlaceForm.addEventListener("submit", handleAddPlaceFormSubmit);
 
-/*Открытие попапа с увеличенной картинкой*/
-//const popupBigImage = document.querySelector(".popup_big-image");
-//const showBigImageCloseButton = popupBigImage.querySelector(".popup__close-btn");
-//const imageOnForm = popupBigImage.querySelector(".popup__big-image");
-//const imageCaption = popupBigImage.querySelector(".popup__image-caption");
-
-// export function showBigImage(evt) {
-//   imageOnForm.src = evt.target.src;
-//   imageOnForm.alt = evt.target.alt;
-//   imageCaption.textContent = evt.target.alt;
-//   openPopup(popupBigImage);
-// }
+const disableButton = (button, classname) => {
+  button.classList.add(classname);
+  button.disabled = true;
+};
 
 /*Реализация закрытия попапа по нажатию на оверлэй и закрытия по нажатию на крестик*/
 const handleMouseDownOnOverlayAndCrossButton = (popupSelector) => {
 
-//Формируем массив форм документа. Критерий выбора - класс формы
+  //Формируем массив форм документа. Критерий выбора - класс формы
   const popupList = Array.from(document.querySelectorAll(popupSelector));
 
   popupList.forEach((popupElement) => {
@@ -241,8 +195,6 @@ const handleMouseDownOnOverlayAndCrossButton = (popupSelector) => {
 
 handleMouseDownOnOverlayAndCrossButton('.popup');
 
-
-
 const enableValidation = (validationObject) => {
 
   //Формируем массив форм документа. Критерий выбора - класс формы
@@ -250,11 +202,10 @@ const enableValidation = (validationObject) => {
 
   /*Для каждой формы отключаем поведение по умолчанию*/
   formList.forEach((formElement) => {
-      const formValidator = new FormValidator(validationObject, formElement);
-      formValidator.enableValidation();
-    });
+    const formValidator = new FormValidator(validationObject, formElement);
+    formValidator.enableValidation();
+  });
 };
-
 
 enableValidation({
   formSelector: '.popup__form',

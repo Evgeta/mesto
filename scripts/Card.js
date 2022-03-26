@@ -1,4 +1,6 @@
-import { openPopup  } from './index.js';
+import {
+  openPopup
+} from './index.js';
 
 export class Card {
   constructor(name, link, templateSelector) {
@@ -29,9 +31,9 @@ export class Card {
     this._element.remove();
   }
 
+  /*Открытие попапа с увеличенной картинкой*/
   _showBigImage = (evt) => {
-    this._element.remove();
-    /*Открытие попапа с увеличенной картинкой*/
+
     const popupBigImage = document.querySelector(".popup_big-image");
     const imageOnForm = popupBigImage.querySelector(".popup__big-image");
     const imageCaption = popupBigImage.querySelector(".popup__image-caption");
@@ -47,17 +49,18 @@ export class Card {
   }
 
   _setEventListeners() {
-
-    const deleteIcon = this._element.querySelector(".gallery__delete-icon");
-
     this._element.querySelector(".gallery__delete-icon").addEventListener("click", this._removeCard);
     this._element.querySelector(".gallery__heart").addEventListener("click", this._toggleLike);
-    this._element.querySelector(".gallery__image").addEventListener("click", (evt) => {this._showBigImage(evt)});
+    this._element.querySelector(".gallery__image").addEventListener("click", (evt) => {
+      this._showBigImage(evt)
+    });
   }
 
   _removeEventListeners() {
     this._element.querySelector(".gallery__delete-icon").removeEventListener("click", this._removeCard);
     this._element.querySelector(".gallery__heart").removeEventListener("click", this._setLike);
-    this._element.querySelector(".gallery__image").removeEventListener("click", (evt) => {this._showBigImage(evt)});
+    this._element.querySelector(".gallery__image").removeEventListener("click", (evt) => {
+      this._showBigImage(evt)
+    });
   }
 }
