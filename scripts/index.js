@@ -1,4 +1,5 @@
 import {Card} from "./Card.js";
+import {FormValidator} from "./FormValidator.js";
 
 
 
@@ -147,8 +148,8 @@ function renderGalleryItem(card, container, place = 'before') {
 
 function renderGallery() {
   initialCards.forEach(item => {
-      const newCard = new Card(item.name, item.link, '#gallery__item');
-      const galleryItem = newCard.getElement();
+      const card = new Card(item.name, item.link, '#gallery__item');
+      const galleryItem = card.getElement();
       renderGalleryItem(galleryItem, gallery, 'after');
   })
 }
@@ -239,3 +240,27 @@ const handleMouseDownOnOverlayAndCrossButton = (popupSelector) => {
 }
 
 handleMouseDownOnOverlayAndCrossButton('.popup');
+
+
+
+const enableValidation = (validationObject) => {
+
+  //Формируем массив форм документа. Критерий выбора - класс формы
+  const formList = Array.from(document.querySelectorAll(validationObject.formSelector));
+
+  /*Для каждой формы отключаем поведение по умолчанию*/
+  formList.forEach((formElement) => {
+      const formValidator = new FormValidator(validationObject, formElement);
+      formValidator.enableValidation();
+    });
+};
+
+
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+});
