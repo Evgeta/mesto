@@ -2,6 +2,9 @@ import {
   openPopup, popupBigImage, imageOnForm, imageCaption
 } from "./utils.js";
 
+
+/*Свяжите класс Card c попапом. Сделайте так, чтобы Card принимал в конструктор функцию handleCardClick.
+Эта функция должна открывать попап с картинкой при клике на карточку.*/
 export class Card {
   constructor(name, link, templateSelector) {
     this._name = name;
