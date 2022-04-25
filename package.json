@@ -1,0 +1,25 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "* Описание проекта\r * Технологии\r * Figma",
+  "main": "/pages/index.js",
+  "dependencies": {
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.8.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Evgeta/mesto.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Evgeta/mesto/issues"
+  },
+  "homepage": "https://github.com/Evgeta/mesto#readme"
+}
