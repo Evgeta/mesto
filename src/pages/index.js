@@ -1,7 +1,7 @@
 import './index.css';
 
-import '../components/Section.js';
-import '../components/Card.js';
+import Section from '../components/Section.js';
+import Card from '../components/Card.js';
 
 import {
   initialCards,
@@ -9,15 +9,22 @@ import {
   gallerySelector
 } from '../utils/constants.js';
 
+// const testitem={
+//   name: "Челябинская область",
+//   link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+// };
+
+//const card = new Card( {testitem, handleCardClick: ()=>{}}, galleryItemTemplateSelector);
+
 
 const cardsList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card({item,
+    const card = new Card({data:item,
       handleCardClick: ()=>{}
     }, galleryItemTemplateSelector);
     const cardElement = card.getElement();
-    cardsList.setItem(cardElement);
+    cardsList.addItem(cardElement);
   }
 },
   gallerySelector
