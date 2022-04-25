@@ -1,12 +1,12 @@
-import {
-  openPopup, popupBigImage, imageOnForm, imageCaption
-} from "./utils.js";
+// import {
+//   openPopup, popupBigImage, imageOnForm, imageCaption
+// } from "./utils.js";
 
 
 /*Свяжите класс Card c попапом. Сделайте так, чтобы Card принимал в конструктор функцию handleCardClick.
 Эта функция должна открывать попап с картинкой при клике на карточку.*/
 
-export class Card {
+export default class Card {
 
   constructor({data, handleCardClick}, templateSelector) {
     this._name = data.name;
@@ -40,12 +40,13 @@ export class Card {
   }
 
   /*Открытие попапа с увеличенной картинкой*/
+  /*
   _showBigImage = () => {
     imageOnForm.src = this._link;
     imageOnForm.alt = this._name;
     imageCaption.textContent = this._name;
     openPopup(popupBigImage);
-  }
+  }*/
 
   _toggleLike() {
     this.classList.toggle('gallery__heart_active');

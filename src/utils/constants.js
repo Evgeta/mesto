@@ -26,3 +26,7 @@ export const initialCards = [{
 }
 ];
 
+
+export const galleryItemTemplateSelector = '#gallery__item';
+
+export const gallerySelector = '.gallery';
