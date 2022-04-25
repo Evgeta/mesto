@@ -5,11 +5,14 @@ import {
 
 /*Свяжите класс Card c попапом. Сделайте так, чтобы Card принимал в конструктор функцию handleCardClick.
 Эта функция должна открывать попап с картинкой при клике на карточку.*/
+
 export class Card {
-  constructor(name, link, templateSelector) {
-    this._name = name;
-    this._link = link;
+
+  constructor({data, handleCardClick}, templateSelector) {
+    this._name = data.name;
+    this._link = data.link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   getElement() {

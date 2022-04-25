@@ -9,56 +9,48 @@ export default class Popup {
 Модальное окно также закрывается при клике на затемнённую область вокруг формы.
 */
 
-  constructor(selector) {
-    this._popup = document.querySelector(selector);
+constructor(selector) {
+  this._popup = document.querySelector(selector);
 
-    this._handleMouseDownOnOverlayAndCrossButton = this._handleMouseDownOnOverlayAndCrossButton.bind(this);
-  }
+  this._handleEscClose = this._handleEscClose.bind(this);
+  this._handleMouseDownOnOverlayAndCrossButton = this._handleMouseDownOnOverlayAndCrossButton.bind(this);
 
-  open() {
-    this._popup.classList.add("popup_opened");
-    //document.addEventListener('keydown', this._handleEscClose);
 
-   // document.addEventListener('keydown', this._handleEscClose);
-  }
+  this._closeButton = this._popup.querySelector('.popup__close-btn');
+}
 
-  close() {
-    this._popup.classList.remove("popup_opened");
-    //document.removeEventListener('keydown', this._handleEscClose);
-    //document.removeEventListener('keydown', this._handleEscClose);
-  }
+open() {
+  this._popup.classList.add("popup_opened");
+  setEventListeners();
+}
 
-  _handleEscClose = (evt) => {
-    if (evt.key === 'Escape') {
-      this.close();
-    }
-  }
+close() {
+  this._popup.classList.remove("popup_opened");
+  _removeEventListeners();
+}
 
-  /*
-  _handleOverlayClose = (evt) => {
-    if (evt.target.classList.contains('popup_opened')) {
-      this.close();
-    }
-  }
-
-  _handleButtonClose = () => {
+_handleEscClose = (evt) => {
+  if (evt.key === 'Escape') {
     this.close();
   }
+}
 
-*/
+_handleMouseDownOnOverlayAndCrossButton = (evt) => {
+  if (evt.target.classList.contains('popup_opened') ||   //обработка нажатия левой кнопки мыши по оверлею
+    evt.target.classList.contains('popup__close-btn')) //обработка нажатия левой кнопки мыши по кнопке-крестику
+  this.close();
+}
 
+setEventListeners() {
+  document.addEventListener('keydown', this._handleEscClose);
+  this._closeButton.addEventListener('click', this._handleButtonClose);
+  this._popup.addEventListener('mousedown', this._handleMouseDownOnOverlayAndCrossButton);
+}
 
-  /*setEventListeners() {
-    this._closeButton = this._popup.querySelector('.popup__btn-close');
-    this._popup.addEventListener('mousedown', this._handleOverlayClose);
-    this._closeButton.addEventListener('click', this._handleButtonClose);
-  }/*
-
- /* _removeEventListeners() {
-    document.removeEventListener('keydown', this._handleEscClose);
-    this._popup.removeEventListener('mousedown', this._handleOverlayClose);
-    this._closeButton.removeEventListener('click', this._handleButtonClose);
-  }
-*/
+_removeEventListeners() {
+  document.removeEventListener('keydown', this._handleEscClose);
+  this._popup.removeEventListener('mousedown', this._handleOverlayClose);
+  this._closeButton.removeEventListener('click', this._handleButtonClose);
+}
 }
 
