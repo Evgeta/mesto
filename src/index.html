@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="./pages/index.css">
+  <!-- <link rel="stylesheet" href="./pages/index.css"> -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Евгения Тарасюк">
   <title>Места России</title>
@@ -12,12 +12,12 @@
 <body class="page">
   <div class="page__container">
     <header class="header">
-      <img class="header__logo" src="./images/logo-mesto.svg" alt="Логотип Место Россия">
+      <img class="header__logo" src="<%=require('./images/logo-mesto.svg')%>"   alt="Логотип Место Россия">
     </header>
     <main class="content">
       <section class="profile">
         <div class="profile__left-block">
-          <img class="profile__avatar" src="./images/avatar.jpg" alt="Фото профиля">
+          <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Фото профиля">
           <div class="profile__info">
             <div class="profile__name-edit-btn">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -34,7 +34,7 @@
           <article class="gallery__item">
             <img class="gallery__image" src="#" alt="Название места">
             <button class="gallery__delete-icon" type="button">
-              <img src="./images/delete_icon.svg" alt="Удалить место">
+              <img src="<%=require('./images/delete_icon.svg')%>"  alt="Удалить место">
             </button>
             <div class="gallery__place-info">
               <h2 class="gallery__place-name"></h2>
@@ -89,7 +89,7 @@
       </figure>
     </div>
   </div>
-  <script type="module" src="./scripts/index.js"></script>
+  <!-- <script type="module" src="./scripts/index.js"></script> -->
   </body>
 
 </html>
