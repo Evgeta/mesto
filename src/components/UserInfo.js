@@ -1,4 +1,4 @@
-export class UserInfo {
+export default class UserInfo {
 
 /*
 
@@ -10,7 +10,6 @@ export class UserInfo {
 Содержит публичный метод setUserInfo, который принимает новые данные пользователя
  и добавляет их на страницу.
 */
-
 
   constructor(userNameSelector, aboutSelector) {
     this._inputName = document.querySelector(userNameSelector);

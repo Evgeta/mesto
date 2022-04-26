@@ -21,12 +21,12 @@ constructor(popupSelector) {
 
 open() {
   this._popup.classList.add("popup_opened");
-  setEventListeners();
+  this.setEventListeners();
 }
 
 close() {
   this._popup.classList.remove("popup_opened");
-  _removeEventListeners();
+  this._removeEventListeners();
 }
 
 _handleEscClose = (evt) => {

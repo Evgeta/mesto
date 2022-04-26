@@ -21,12 +21,12 @@ constructor(selector) {
 
 open() {
   this._popup.classList.add("popup_opened");
-  setEventListeners();
+  this.setEventListeners();
 }
 
 close() {
   this._popup.classList.remove("popup_opened");
-  _removeEventListeners();
+  this._removeEventListeners();
 }
 
 _handleEscClose = (evt) => {
@@ -49,8 +49,8 @@ setEventListeners() {
 
 _removeEventListeners() {
   document.removeEventListener('keydown', this._handleEscClose);
-  this._popup.removeEventListener('mousedown', this._handleOverlayClose);
   this._closeButton.removeEventListener('click', this._handleButtonClose);
+  this._popup.removeEventListener('mousedown', this.__handleMouseDownOnOverlayAndCrossButton);
 }
 }
 

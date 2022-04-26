@@ -5,6 +5,7 @@ import Card from '../components/Card.js';
 
 import UserInfo from '../components/UserInfo.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import FormValidator from '../components/FormValidator.js';
 
 
 
@@ -12,9 +13,18 @@ import {
   initialCards,
   galleryItemTemplateSelector,
   gallerySelector,
-  profileSelector,
+  profileBlockSelector,
+  profilePopupSelector,
   userinfo,
-  profieNameEditButton
+  profieNameEditButton,
+  profileSelector,
+  profile,
+  profileNameEditButtonSelector,
+  profileNameEditButton,
+  inputName,
+  inputAbout,
+  validationObject,
+  formProfile
 } from '../utils/constants.js';
 
 //созлание карточек и соответствующих им элементов
@@ -42,11 +52,10 @@ const user = new UserInfo(userinfo.userNameSelector, userinfo.aboutSelector);
 //создание попапа для редактирования профиля пользователя
 
 const popupProfile = new PopupWithForm({
-  popupSelector: profileSelector,
-  handleFormSubmit: (user) => {
-    const data = this._getInputValues();
-    user.setUserInfo(data);
-    this.close();
+  popupSelector: profilePopupSelector,
+  handleFormSubmit: () => {
+    user.setUserInfo(popupProfile._getInputValues());
+    popupProfile.close();
   }
 })
 
@@ -54,23 +63,15 @@ popupProfile.setEventListeners();
 
 //создание слушателя для кнопки редактирования профиля
 
-profieNameEditButton.addEventListener('click', () => {
+profileNameEditButton.addEventListener('click', () => {
   const {name, about} = user.getUserInfo();
-  nameInput.value = name;
+  inputName.value = name;
   inputAbout.value = about;
-//  formEditProfile.toggleButtonState()
+  //formEditProfileValidator.toggleButtonState();
   popupProfile.open();
 })
 
-
-/*
-btnPlus.addEventListener('click', () => {
-  formAddCard.toggleButtonState()
-  popUpAdd.open()
-})
-*/
-
-//попап с картинкой
-// const popUpWithImg = new PopupWithImage(popupImg)
-// popUpWithImg.setEventListeners()
-
+//создание класса валидации
+const formEditProfileValidator = new FormValidator(validationObject, formProfile);
+//включение валидации в форме редактирования профиля
+formEditProfileValidator.enableValidation();

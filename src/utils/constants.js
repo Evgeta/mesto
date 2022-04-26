@@ -29,7 +29,7 @@ export const initialCards = [{
 
 export const galleryItemTemplateSelector = '#gallery__item'; //шаблон элемента галлерие - карточки
 export const gallerySelector = '.gallery'; //селектор элемента галерея
-export const profileBlockSelector = '.popup_edit-profile';  //селектор блока профиля
+export const profilePopupSelector = '.popup_edit-profile';  //селектор блока профиля
 
 
 //информация о пользователе на странице
@@ -50,14 +50,27 @@ export const profile = document.querySelector(".profile");
 //селектор кнопки редактирования профиля
 export const profileNameEditButtonSelector = '.profile__name-edit-btn';
 //ссылка на кнопку редактирвания профиля
-export const profileNameEditButton = profile.querySelector(profieNameEditButtonSelector);
+export const profileNameEditButton = profile.querySelector(profileNameEditButtonSelector);
 
 //информация о пользователе в попапе редактирования профиля в инпутах
 export const inputName = document.querySelector('.popup__input_type_name');
-export const inputAbout = profile.querySelector('.popup__input_type_about');
+export const inputAbout = document.querySelector('.popup__input_type_about');
 
+//настройка объекта валидации
+export const validationObject = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+}
 
+//форма редактирования профиля
+//export const formProfile = document.querySelector('input[name="editProfileForm"]');
 
+export const formProfile = Array.from(document.querySelectorAll(validationObject.formSelector))[0];
+console.log(formProfile);
 
 
 

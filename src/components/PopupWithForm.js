@@ -11,11 +11,11 @@ import Popup from '../components/Popup.js';
 Для каждого попапа создавайте свой экземпляр класса PopupWithForm.
 */
 
-
-export class PopupWithForm extends Popup {
+export default class PopupWithForm extends Popup {
   constructor({popupSelector, handleFormSubmit}) {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
+
 
     this._form = this._popup.querySelector('.popup__form');  //форма
     this._inputList = this._form.querySelectorAll('.popup__input'); //все поля для ввода
@@ -26,14 +26,14 @@ export class PopupWithForm extends Popup {
 
   _getInputValues = () => {
     this._inputList.forEach((input) => {
-      this._inputValues[input.name] = input.value;
+    this._inputValues[input.name] = input.value;
     });
     return this._inputValues;
   }
 
   _submitForm = (evt) => {
     evt.preventDefault();
-    this._handleFormSubmit(this._getInputValues());
+    this._handleFormSubmit();
   }
 
   setEventListeners() {
