@@ -9,32 +9,23 @@ export class UserInfo {
  Этот метод пригодится когда данные пользователя нужно будет подставить в форму при открытии.
 Содержит публичный метод setUserInfo, который принимает новые данные пользователя
  и добавляет их на страницу.
-
 */
 
-/*
+
   constructor(userNameSelector, aboutSelector) {
-    this._userName = document.querySelector(nameSelector);
-    this._aboutInfo = document.querySelector(subSelector);
-    this._avatar = document.querySelector(avatar);
+    this._inputName = document.querySelector(userNameSelector);
+    this._inputAbout = document.querySelector(aboutSelector);
   }
 
   setUserInfo(data) {
-    this._userName.textContent = data.name;
-    this._aboutInfo.textContent = data.about;
-    this._avatar.src = data.avatar
+    this._inputName.textContent = data.name;
+    this._inputAbout.textContent = data.about;
   }
 
   getUserInfo() {
    return {
-     name: this._userName.textContent,
-     about: this._aboutInfo.textContent
+     name: this._inputName.textContent,
+     about: this._inputAbout.textContent
    }
   }
-
-  setUserAva(data) {
-    this._avatar.src = data.avatar
-  }
-
-*/
 }

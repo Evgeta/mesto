@@ -3,19 +3,16 @@ import './index.css';
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
 
+import UserInfo from '../components/UserInfo.js';
+
+
 import {
   initialCards,
   galleryItemTemplateSelector,
   gallerySelector
 } from '../utils/constants.js';
 
-// const testitem={
-//   name: "Челябинская область",
-//   link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-// };
-
-//const card = new Card( {testitem, handleCardClick: ()=>{}}, galleryItemTemplateSelector);
-
+//созлание карточек и соответствующих им элементов
 
 const cardsList = new Section({
   items: initialCards,
@@ -30,6 +27,11 @@ const cardsList = new Section({
   gallerySelector
 );
 
+//начальная отрисовка карточек
 cardsList.renderItems();
 
+
+//попап с картинкой
+const popUpWithImg = new PopupWithImage(popupImg)
+popUpWithImg.setEventListeners()
 
