@@ -24,7 +24,11 @@ import {
   inputName,
   inputAbout,
   validationObject,
-  formProfile
+  formProfile,
+  addPlaceSelector,
+  placeAddButton,
+  popupNewPlace,
+  formAddPlace
 } from '../utils/constants.js';
 
 //созлание карточек и соответствующих им элементов
@@ -75,3 +79,29 @@ profileNameEditButton.addEventListener('click', () => {
 const formEditProfileValidator = new FormValidator(validationObject, formProfile);
 //включение валидации в форме редактирования профиля
 formEditProfileValidator.enableValidation();
+
+
+//добавление новой карточки
+
+const popupAddPlace = new PopupWithForm({
+  popupSelector: addPlaceSelector,
+  handleFormSubmit: () => {
+    // cardList.addItem(createNewCard(data))
+    popupAddPlace.close();
+    }
+  })
+
+  popupAddPlace.setEventListeners();
+
+//создание слушателя для кнопки добавления нового места
+
+  placeAddButton.addEventListener('click', () => {
+      //formEditProfileValidator.toggleButtonState();
+      popupAddPlace.open();
+  })
+
+//создание класса валидации
+ const formAddPlaceValidator = new FormValidator(validationObject, formAddPlace);
+//включение валидации в форме добавления места
+ formAddPlaceValidator.enableValidation();
+

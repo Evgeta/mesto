@@ -39,7 +39,7 @@ export const userinfo = {
 }
 
 
-/*Константы связанные с информацие й в профиле*/
+/*Константы связанные с информацией в профиле*/
 
 //селектор секции профиля на странице
 export const profileSelector = '.profile';
@@ -68,9 +68,19 @@ export const validationObject = {
 
 //форма редактирования профиля
 //export const formProfile = document.querySelector('input[name="editProfileForm"]');
-
 export const formProfile = Array.from(document.querySelectorAll(validationObject.formSelector))[0];
-console.log(formProfile);
+
+//константы, связанные с добавлением новой карточки
+export const addPlaceSelector = '.popup_new-place';
+export const placeAddButton = profile.querySelector('.profile__add-btn'); //кнопка добавления места
+export const popupNewPlace = document.querySelector(addPlaceSelector); //блок добавления карточки
+//export const popupNewPlace = document.querySelector('popup_new-place'); //блок добавления карточки
+
+console.log(popupNewPlace);
+export const formAddPlace = popupNewPlace.querySelector('.popup__form'); //форма добавления места
+console.log(formAddPlace);
+
+
 
 
 

@@ -15,7 +15,6 @@ constructor(selector) {
   this._handleEscClose = this._handleEscClose.bind(this);
   this._handleMouseDownOnOverlayAndCrossButton = this._handleMouseDownOnOverlayAndCrossButton.bind(this);
 
-
   this._closeButton = this._popup.querySelector('.popup__close-btn');
 }
 
