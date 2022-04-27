@@ -137,7 +137,14 @@ const popupAddPlace = new PopupWithForm({
   handleFormSubmit: () => {
    // const {name, about} = user.getUserInfo();
     // cardList.addItem(createNewCard(data))
-    //cardList.addItem(createNewCard(data))
+
+    //user.setUserInfo(popupProfile._getInputValues());
+
+    //console.log(data);
+
+    //console.log(popupAddPlace._getInputValues());
+
+    cardsList.addItem(createNewCard(popupAddPlace._getInputValues()));
     popupAddPlace.close();
     }
   })
@@ -162,18 +169,3 @@ const popupWithImg = new PopupWithImage(bigImageSelector);
 popupWithImg.setEventListeners();
 
 
-
-// const cardsList = new Section({
-//   items: initialCards,
-//   renderer: (item) => {
-//     const card = new Card({data:item,
-//       handleCardClick: () => {
-//         popupWithImg.open(item);
-//       }
-//     }, galleryItemTemplateSelector);
-//     const cardElement = card.getElement();
-//     cardsList.addItem(cardElement);
-//   }
-// },
-//   gallerySelector
-// );
