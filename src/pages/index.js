@@ -33,18 +33,65 @@ import {
 
 //созлание карточек и соответствующих им элементов
 
+
+//функция создания новой карточки
+
+const item = {
+  name: "Иваново",
+  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+};
+
+const createNewCard = (item) => {
+  //console.log(item);
+  const newCard = new Card({data:item,
+    handleCardClick: () => {
+      popupWithImg.open(item);
+    }
+  }, galleryItemTemplateSelector);
+
+    //console.log(newCard.getElement());
+  return newCard.getElement();
+}
+
+//createNewCard(item);
+
+
+
+/*рабочий код*/
+
+// const cardsList = new Section({
+//   items: initialCards,
+//   renderer: (item) => {
+//     const card = new Card({data:item,
+//       handleCardClick: () => {
+//         popupWithImg.open(item);
+//       }
+//     }, galleryItemTemplateSelector);
+//     const cardElement = card.getElement();
+//     cardsList.addItem(cardElement);
+//   }
+// },
+//   gallerySelector
+// );
+
+
+
 const cardsList = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    const card = new Card({data:item,
-      handleCardClick: ()=>{}
-    }, galleryItemTemplateSelector);
-    const cardElement = card.getElement();
-    cardsList.addItem(cardElement);
-  }
-},
-  gallerySelector
-);
+    items: initialCards,
+    renderer: (item) => {
+      // const card = new Card({data:item,
+      //   handleCardClick: () => {
+      //     popupWithImg.open(item);
+      //   }
+      // }, galleryItemTemplateSelector);
+      // const cardElement = card.getElement();
+      cardsList.addItem(createNewCard(item));
+    }
+  },
+    gallerySelector
+  );
+
+
 
 //начальная отрисовка карточек
 cardsList.renderItems();
@@ -82,11 +129,6 @@ formEditProfileValidator.enableValidation();
 
 
 
-//создание новой карточки
-
-//функция создания карточки
-
-
 
 //добавление новой карточки
 
@@ -119,3 +161,19 @@ const popupAddPlace = new PopupWithForm({
 const popupWithImg = new PopupWithImage(bigImageSelector);
 popupWithImg.setEventListeners();
 
+
+
+// const cardsList = new Section({
+//   items: initialCards,
+//   renderer: (item) => {
+//     const card = new Card({data:item,
+//       handleCardClick: () => {
+//         popupWithImg.open(item);
+//       }
+//     }, galleryItemTemplateSelector);
+//     const cardElement = card.getElement();
+//     cardsList.addItem(cardElement);
+//   }
+// },
+//   gallerySelector
+// );

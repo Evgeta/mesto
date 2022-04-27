@@ -1,14 +1,12 @@
-// import {
-//   openPopup, popupBigImage, imageOnForm, imageCaption
-// } from "./utils.js";
 
-
-/*Свяжите класс Card c попапом. Сделайте так, чтобы Card принимал в конструктор функцию handleCardClick.
+/*Свяжите класс Card c попапом.
+ Сделайте так, чтобы Card принимал в конструктор функцию handleCardClick.
 Эта функция должна открывать попап с картинкой при клике на карточку.*/
 
 export default class Card {
 
   constructor({data, handleCardClick}, templateSelector) {
+    this._data = data;
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
@@ -55,12 +53,12 @@ export default class Card {
   _setEventListeners() {
     this._element.querySelector(".gallery__delete-icon").addEventListener("click", this._removeCard);
     this._element.querySelector(".gallery__heart").addEventListener("click", this._toggleLike);
-    this._element.querySelector(".gallery__image").addEventListener("click", this._showBigImage);
+    this._element.querySelector(".gallery__image").addEventListener("click", this._handleCardClick);
   }
 
   _removeEventListeners() {
     this._element.querySelector(".gallery__delete-icon").removeEventListener("click", this._removeCard);
     this._element.querySelector(".gallery__heart").removeEventListener("click", this._setLike);
-    this._element.querySelector(".gallery__image").removeEventListener("click", this._showBigImage);
+    this._element.querySelector(".gallery__image").removeEventListener("click", this._handleCardClick);
   }
 }
