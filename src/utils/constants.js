@@ -81,6 +81,6 @@ export const formAddPlace = popupNewPlace.querySelector('.popup__form'); //фо�
 console.log(formAddPlace);
 
 
-
-
+//блок констант, связанных с отображением большой картинки при нажатии
+export const bigImageSelector = '.popup_big-image';
 

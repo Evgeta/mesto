@@ -5,9 +5,8 @@ import Card from '../components/Card.js';
 
 import UserInfo from '../components/UserInfo.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
 import FormValidator from '../components/FormValidator.js';
-
-
 
 import {
   initialCards,
@@ -28,7 +27,8 @@ import {
   addPlaceSelector,
   placeAddButton,
   popupNewPlace,
-  formAddPlace
+  formAddPlace,
+  bigImageSelector
 } from '../utils/constants.js';
 
 //созлание карточек и соответствующих им элементов
@@ -81,12 +81,21 @@ const formEditProfileValidator = new FormValidator(validationObject, formProfile
 formEditProfileValidator.enableValidation();
 
 
+
+//создание новой карточки
+
+//функция создания карточки
+
+
+
 //добавление новой карточки
 
 const popupAddPlace = new PopupWithForm({
   popupSelector: addPlaceSelector,
   handleFormSubmit: () => {
+   // const {name, about} = user.getUserInfo();
     // cardList.addItem(createNewCard(data))
+    //cardList.addItem(createNewCard(data))
     popupAddPlace.close();
     }
   })
@@ -104,4 +113,9 @@ const popupAddPlace = new PopupWithForm({
  const formAddPlaceValidator = new FormValidator(validationObject, formAddPlace);
 //включение валидации в форме добавления места
  formAddPlaceValidator.enableValidation();
+
+
+ //попап с картинкой
+const popupWithImg = new PopupWithImage(bigImageSelector);
+popupWithImg.setEventListeners();
 
