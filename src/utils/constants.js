@@ -1,35 +1,34 @@
-
 /*Список карточек в начальном состоянии*/
 export const initialCards = [{
-  name: "Архыз",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-},
-{
-  name: "Челябинская область",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-},
-{
-  name: "Иваново",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-},
-{
-  name: "Камчатка",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-},
-{
-  name: "Холмогорский район",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-},
-{
-  name: "Байкал",
-  link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-}
+    name: "Архыз",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+  },
+  {
+    name: "Челябинская область",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+  },
+  {
+    name: "Иваново",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+  },
+  {
+    name: "Камчатка",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
+  },
+  {
+    name: "Холмогорский район",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
+  },
+  {
+    name: "Байкал",
+    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+  }
 ];
 
 
 export const galleryItemTemplateSelector = '#gallery__item'; //шаблон элемента галлерие - карточки
 export const gallerySelector = '.gallery'; //селектор элемента галерея
-export const profilePopupSelector = '.popup_edit-profile';  //селектор блока профиля
+export const profilePopupSelector = '.popup_edit-profile'; //селектор блока профиля
 
 
 //информация о пользователе на странице
@@ -67,20 +66,14 @@ export const validationObject = {
 }
 
 //форма редактирования профиля
-//export const formProfile = document.querySelector('input[name="editProfileForm"]');
 export const formProfile = Array.from(document.querySelectorAll(validationObject.formSelector))[0];
 
 //константы, связанные с добавлением новой карточки
 export const addPlaceSelector = '.popup_new-place';
 export const placeAddButton = profile.querySelector('.profile__add-btn'); //кнопка добавления места
 export const popupNewPlace = document.querySelector(addPlaceSelector); //блок добавления карточки
-//export const popupNewPlace = document.querySelector('popup_new-place'); //блок добавления карточки
-
-console.log(popupNewPlace);
 export const formAddPlace = popupNewPlace.querySelector('.popup__form'); //форма добавления места
-console.log(formAddPlace);
 
 
-//блок констант, связанных с отображением большой картинки при нажатии
+//блок констант, связанных с отображением большой картинки при нажатии/блок констант, связанных с отображением большой картинки при нажатии
 export const bigImageSelector = '.popup_big-image';
-
