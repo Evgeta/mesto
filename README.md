@@ -1,4 +1,4 @@
-# Проект: Учебный проект Яндекс.Практикума. Спринт 7. Место.
+# Проект: Учебный проект Яндекс.Практикума. Спринт 8. Место.
 ### Обзор
 * Описание проекта
 * Технологии
@@ -25,6 +25,8 @@
 * Валидация форм
 * Улучшен UX при работе с попапами
 * Использованы ES6-классы
+* Использовано слабое связывание классов
+* Использована деструктуризация
 
 **Figma**
 
@@ -32,7 +34,7 @@
 
 * [Ссылка на макет в Figma](https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6?node-id=0%3A1)
 
-Чеклист по проекту [Чеклист](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-7.pdf)
+Чеклист по проекту [Чеклист](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-8.pdf)
 
 [Ссылка на проект](https://evgeta.github.io/mesto/)
 
