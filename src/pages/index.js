@@ -58,8 +58,8 @@ const user = new UserInfo(userinfo.userNameSelector, userinfo.aboutSelector);
 
 const popupProfile = new PopupWithForm({
   popupSelector: profilePopupSelector,
-  handleFormSubmit: () => {
-    user.setUserInfo(popupProfile._getInputValues());
+  handleFormSubmit: (userData) => {
+    user.setUserInfo(userData);
     popupProfile.close();
   }
 })
@@ -83,12 +83,11 @@ profileNameEditButton.addEventListener('click', () => {
   popupProfile.open();
 })
 
-
 //добавление новой карточки
 const popupAddPlace = new PopupWithForm({
   popupSelector: addPlaceSelector,
-  handleFormSubmit: () => {
-    cardsList.addItem(createNewCard(popupAddPlace._getInputValues()));
+  handleFormSubmit: (imageData) => {
+    cardsList.addItem(createNewCard(imageData));
     popupAddPlace.close();
   }
 })
