@@ -96,6 +96,7 @@ popupAddPlace.setEventListeners();
 
 //создание слушателя для кнопки добавления нового места
 placeAddButton.addEventListener('click', () => {
+  formAddPlaceValidator.toggleButtonState();
   popupAddPlace.open();
 })
 

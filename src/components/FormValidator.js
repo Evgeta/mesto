@@ -10,6 +10,10 @@ export default class FormValidator {
     this._formElement = formElement;
 
     this._button = this._formElement.querySelector(".popup__button");
+
+    this._fieldsetList = Array.from(this._formElement.querySelectorAll('.popup__fieldset'));
+    this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
   }
 
   _showInputError(inputElement, errorMessage) {
@@ -36,10 +40,10 @@ export default class FormValidator {
     }
   };
 
-  _hasInvalidInput = (inputList) => {
+  _hasInvalidInput = () => {
     /*если хотя бы в один элемент введены не валидные данные,
      сообщаем, что данные филдсета не валидны*/
-    return inputList.some((inputElement) => {
+    return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   }
@@ -54,39 +58,29 @@ export default class FormValidator {
     this._button.disabled = true;
   };
 
-  _toggleButtonState = (inputList, buttonElement) => {
-    if (this._hasInvalidInput(inputList)) {
-      this.disableButton(buttonElement, this._inactiveButtonClass);
+  toggleButtonState = () => {
+    if (this._hasInvalidInput(this._inputList)) {
+      this.disableButton(this._buttonElement, this._inactiveButtonClass);
     } else {
-      this._enableButton(buttonElement, this._inactiveButtonClass);
+      this._enableButton(this._buttonElement, this._inactiveButtonClass);
     }
   }
 
-  _setEventListeners = (fieldSet) => {
-    //формируем список input-элементов набора полей
-    const inputList = Array.from(fieldSet.querySelectorAll(this._inputSelector));
-    //получает ссылку на кнопку подтверждения
-    const buttonElement = fieldSet.querySelector(this._submitButtonSelector);
+  _setEventListeners = () => {
+
     // чтобы проверить состояние кнопки в самом начале
-    this._toggleButtonState(inputList, buttonElement);
-    inputList.forEach((inputElement) => {
+    this.toggleButtonState();
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
         // чтобы проверять его при изменении любого из полей
-        this._toggleButtonState(inputList, buttonElement);
+        this.toggleButtonState();
       });
     });
   };
 
   enableValidation = () => {
-    //добаляем обработчик подтверждения и отключаем поведение по умолчанию
-    this._formElement.addEventListener('submit', function (evt) {
-      evt.preventDefault();
-    });
     /*Для каждого набора полей устанавливаем слушателей*/
-    const fieldsetList = Array.from(this._formElement.querySelectorAll('.popup__fieldset'));
-    fieldsetList.forEach((fieldSet) => {
-      this._setEventListeners(fieldSet);
-    });
+    this._setEventListeners();
   }
 }
