@@ -6,6 +6,7 @@ import UserInfo from '../components/UserInfo.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import FormValidator from '../components/FormValidator.js';
+import Api from '../components/Api.js';
 
 import {
   initialCards,
@@ -21,9 +22,24 @@ import {
   addPlaceSelector,
   placeAddButton,
   formAddPlace,
-  bigImageSelector
+  bigImageSelector,
+  baseUrl,
+  token
 } from '../utils/constants.js';
 
+
+//инициализация API
+
+const api = new Api({
+  baseUrl: baseUrl,
+  headers: {
+    authorization: token,
+    'Content-Type': 'application/json'
+  }
+});
+
+//Запрос на получение карточек
+api.getInitialCards();
 
 //создание карточек и соответствующих им элементов
 
