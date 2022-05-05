@@ -7,6 +7,7 @@ export default class Card {
     this._data = data;
     this._name = data.name;
     this._link = data.link;
+    this._likes = data.likes.length;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -22,6 +23,9 @@ export default class Card {
 
     //наполняем значением подпись
     this._element.querySelector(".gallery__place-name").textContent = this._name;
+
+    //заполняем количество лайков
+    this._element.querySelector(".gallery__like-count").textContent = this._likes;
 
     //создаем слушателей
     this._setEventListeners();

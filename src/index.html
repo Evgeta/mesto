@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+div<!DOCTYPE html>
 <html lang="ru">
 
 <head>
@@ -34,11 +34,14 @@
           <article class="gallery__item">
             <img class="gallery__image" src="#" alt="Название места">
             <button class="gallery__delete-icon" type="button">
-              <img src="<%=require('./images/delete_icon.svg')%>"  alt="Удалить место">
+              <img src="<%=require('./images/delete_icon.svg')%>" alt="Удалить место">
             </button>
             <div class="gallery__place-info">
               <h2 class="gallery__place-name"></h2>
-              <button class="gallery__heart" type="button" aria-label="Кнопка лайка"></button>
+              <div class="gallery__like-info">
+                <button class="gallery__heart" type="button" aria-label="Кнопка лайка"></button>
+                <span class="gallery__like-count">0</span>
+              </div>
             </div>
           </article>
         </template>
