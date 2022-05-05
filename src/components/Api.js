@@ -8,7 +8,7 @@ export default class Api {
     this._token = headers.authorization;
   }
 
-
+//проверка ответа
   _checkResponse(res) {
     if (res.ok) {
       return res.json();
@@ -16,6 +16,7 @@ export default class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
+  //получение карочек с сервера
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
         headers: this._headers
@@ -26,6 +27,8 @@ export default class Api {
         console.log(err); // выведем ошибку в консоль
       });
   }
+
+
 
 
 }
