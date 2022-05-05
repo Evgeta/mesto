@@ -38,8 +38,6 @@ const api = new Api({
   }
 });
 
-//Запрос на получение карточек
-api.getInitialCards();
 
 //создание карточек и соответствующих им элементов
 
@@ -56,7 +54,8 @@ const createNewCard = (item) => {
 }
 
 const cardsList = new Section({
-    items: initialCards,
+   //  items: initialCards,
+   // items: initialCardsFromServer,
     renderer: (item) => {
       cardsList.addItem(createNewCard(item));
     }
@@ -64,8 +63,19 @@ const cardsList = new Section({
   gallerySelector
 );
 
-//начальная отрисовка карточек
-cardsList.renderItems();
+
+console.log(cardsList);
+
+//Запрос на получение карточек
+
+api.getInitialCards()
+.then((cardsFromServer) => {
+  cardsList.renderItems(cardsFromServer);
+})
+.catch((err) => {
+ console.log(`Ошибка в api.getInitialCards(): ${err.status}`)
+})
+
 
 //текущая информация о пользователе
 const user = new UserInfo(userinfo.userNameSelector, userinfo.aboutSelector);
