@@ -55,6 +55,22 @@ export default class Api {
     });
   }
 
+  addNewCard(data) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.name,
+        link: data.link
+      })
+    })
+    .then((res) => this._checkResponse(res))
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
+  }
+
+
 
 
 

@@ -141,8 +141,15 @@ profileNameEditButton.addEventListener('click', () => {
 const popupAddPlace = new PopupWithForm({
   popupSelector: addPlaceSelector,
   handleFormSubmit: (imageData) => {
-    cardsList.addItem(createNewCard(imageData));
-    popupAddPlace.close();
+
+    api.addNewCard(imageData)
+    .then((imageData) => {
+      cardsList.addItem(createNewCard(imageData));
+      popupAddPlace.close();
+    })
+    .catch((err) => {
+     console.log(`Ошибка api.addNewCard(imageData): ${err.status}`)
+    })
   }
 })
 
