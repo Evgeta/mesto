@@ -1,4 +1,4 @@
-div<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 
 <head>
@@ -92,8 +92,20 @@ div<!DOCTYPE html>
       </figure>
     </div>
   </div>
-  <!-- <script type="module" src="./scripts/index.js"></script> -->
-  </body>
+
+  <div class="popup popup_delete-card">
+    <div class="popup__container">
+      <button class="popup__close-btn" type="button" aria-label="Кнопка закрытия всплывающего окна"></button>
+      <form class="popup__form" name="deleteCardForm" novalidate>
+        <h3 class="popup__title">Вы уверены?</h3>
+        <fieldset class="popup__fieldset">
+          <button type="submit" class="popup__button">Да</button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+ </body>
 
 </html>
 

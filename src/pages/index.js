@@ -2,18 +2,19 @@ import './index.css';
 
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
-import UserInfo from '../components/UserInfo.js';
+//import UserInfo from '../components/UserInfo.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import FormValidator from '../components/FormValidator.js';
 import Api from '../components/Api.js';
+import UserInfo from '../components/UserInfo.js';
+import PopupConfirmDeletion from  '../components/PopupConfirmDeletion.js';
 
 import {
   initialCards,
   galleryItemTemplateSelector,
   gallerySelector,
   profilePopupSelector,
-  userinfo,
   profileNameEditButton,
   inputName,
   inputAbout,
@@ -24,7 +25,11 @@ import {
   formAddPlace,
   bigImageSelector,
   baseUrl,
-  token
+  token,
+  deleteCardPopupSelector,
+  userNameSelector,
+  userAboutSelector,
+  userAvatarSelector
 } from '../utils/constants.js';
 
 
@@ -38,6 +43,8 @@ const api = new Api({
   }
 });
 
+//информация о пользователе на странице
+const userOnPage = new UserInfo(userNameSelector, userAboutSelector, userAvatarSelector);
 
 //создание карточек и соответствующих им элементов
 
@@ -54,8 +61,6 @@ const createNewCard = (item) => {
 }
 
 const cardsList = new Section({
-   //  items: initialCards,
-   // items: initialCardsFromServer,
     renderer: (item) => {
       cardsList.addItem(createNewCard(item));
     }
@@ -64,10 +69,12 @@ const cardsList = new Section({
 );
 
 
-console.log(cardsList);
+//console.log(cardsList);
+
+//объявление идентификатора пользователя
+let user_id = null;
 
 //Запрос на получение карточек
-
 api.getInitialCards()
 .then((cardsFromServer) => {
   cardsList.renderItems(cardsFromServer);
@@ -77,16 +84,37 @@ api.getInitialCards()
 })
 
 
-//текущая информация о пользователе
-const user = new UserInfo(userinfo.userNameSelector, userinfo.aboutSelector);
+//Запрос информации о пользователе
+api.getUserInfo()
+.then((userInfo) => {
+  user_id = userInfo._id;
+  console.log(user_id);
+  console.log(userInfo);
+  userOnPage.setUserInfo(userInfo);
+})
+.catch((err) => {
+ console.log(`Ошибка в api.getUserInfo: ${err.status}`)
+})
+
+
 
 //создание попапа для редактирования профиля пользователя
 
 const popupProfile = new PopupWithForm({
   popupSelector: profilePopupSelector,
   handleFormSubmit: (userData) => {
-    user.setUserInfo(userData);
-    popupProfile.close();
+    api.setUserInfo(userData)
+    .then((res) => {
+
+      console.log('console.log(res);');
+      console.log(res);
+      //userOnPage.setUserInfo(userData);
+      userOnPage.setUserInfo(res);
+      popupProfile.close();
+    })
+    .catch((err) => {
+     console.log(`Ошибка api.setUserInfo(userData): ${err.status}`)
+    })
   }
 })
 
@@ -103,7 +131,7 @@ profileNameEditButton.addEventListener('click', () => {
   const {
     name,
     about
-  } = user.getUserInfo();
+  } = userOnPage.getUserInfo();
   inputName.value = name;
   inputAbout.value = about;
   popupProfile.open();
@@ -134,3 +162,20 @@ formAddPlaceValidator.enableValidation();
 //попап с картинкой
 const popupWithImg = new PopupWithImage(bigImageSelector);
 popupWithImg.setEventListeners();
+
+
+
+//создание попапа подтверждения удаления карточки
+
+const popupDeleteCard = new PopupConfirmDeletion({
+  popupSelector: deleteCardPopupSelector,
+  handleFormSubmit: () => {
+    //удаление карточки
+
+    popupDeleteCard.close();
+  }
+})
+
+popupDeleteCard.setEventListeners();
+
+

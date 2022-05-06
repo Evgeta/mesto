@@ -28,6 +28,33 @@ export default class Api {
       });
   }
 
+  getUserInfo() {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: {
+        authorization: this._token,
+      }
+    })
+    .then((res) => this._checkResponse(res))
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
+  }
+
+  setUserInfo(data) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.name,
+        about: data.about
+      })
+    })
+    .then((res) => this._checkResponse(res))
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
+  }
+
 
 
 
