@@ -1,11 +1,15 @@
 import Popup from '../components/Popup.js';
 export default class PopupConfirmDeletion extends Popup {
-  constructor({
+  constructor(
     popupSelector
-  }) {
+  ) {
+
+    console.log('вывод селектора попапа внутри класса');
+     
+
     super(popupSelector);
     this._form = this._popup.querySelector('.popup__form'); //форма
-    this._buttonSubmit = this._form.querySelector('.popup__button'); //кнопка сохранения
+    this._buttonSubmit = this._form.querySelector('.popup__button'); //кнопка да - подтверждения удаления
   }
 
   setEventListeners() {

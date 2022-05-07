@@ -54,6 +54,38 @@ const createNewCard = (item) => {
     data: item,
     handleCardClick: () => {
       popupWithImg.open(item);
+    },
+    currentUser: user_id,
+    handleDeleteButtonClick: () => {
+      popupDeleteCard.open();
+      popupDeleteCard.submitDelete(() => {
+        api.deleteCard(item._id)
+        .then(() => {
+          newCard.deleteCard();
+          popupDeleteCard.close()
+        })
+        .catch((err) => {
+          console.log(err); // выведем ошибку в консоль
+        }); //
+      }) //
+    },
+    setLike: () => {
+      api.setlike(newCard._data) //пересмотреть
+      .then((data) => {
+        newCard.setLike(data)
+      })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      }); //
+    },
+    removeLike: () => {
+      api.removeLike(newCard._data) //пересмотреть
+      .then((data) => {
+        newCard.deleteLike(data)
+      })
+      .catch((err) => {
+        console.log(err); // выведем ошибку в консоль
+      }); //
     }
   }, galleryItemTemplateSelector);
 
@@ -108,7 +140,6 @@ const popupProfile = new PopupWithForm({
 
       console.log('console.log(res);');
       console.log(res);
-      //userOnPage.setUserInfo(userData);
       userOnPage.setUserInfo(res);
       popupProfile.close();
     })
@@ -173,15 +204,12 @@ popupWithImg.setEventListeners();
 
 
 //создание попапа подтверждения удаления карточки
+console.log('вывод селектора попапа');
 
-const popupDeleteCard = new PopupConfirmDeletion({
-  popupSelector: deleteCardPopupSelector,
-  handleFormSubmit: () => {
-    //удаление карточки
+console.log(deleteCardPopupSelector);
 
-    popupDeleteCard.close();
-  }
-})
+
+const popupDeleteCard = new PopupConfirmDeletion(deleteCardPopupSelector);
 
 popupDeleteCard.setEventListeners();
 

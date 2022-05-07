@@ -70,6 +70,39 @@ export default class Api {
     });
   }
 
+  deleteCard(_id) {
+    return fetch(`${this._baseUrl}/cards/${_id}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then((res) => this._checkResponse(res))
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
+  }
+
+  setLike(data) {
+    return fetch(`${this._baseUrl}/cards/likes/${data._id}`, {
+      method: 'PUT',
+      headers: this._headers
+    })
+    .then((res) => this._checkResponse(res))
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
+  }
+
+  removeLike(data) {
+    return fetch(`${this._baseUrl}/cards/likes/${data._id}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then((res) => this._checkResponse(res))
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
+  }
+
 
 
 
