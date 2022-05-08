@@ -38,6 +38,15 @@ export default class Card {
     //заполняем количество лайков
     this._element.querySelector(".gallery__like-count").textContent = this._likes;
 
+    //если текущий пользователь уже ставил лайк - подсвечиваем седечко
+    this._likedByCurrentUser();
+
+    //если текущий пользователь - владелец катрочки - отображаем кнопку удаления карточки 
+    if (this._cardOwner === this._currentUser) {
+      this._element.querySelector('.gallery__delete-icon').classList.remove('gallery__delete-icon_hidden')
+    }
+
+
     //создаем слушателей
     this._setEventListeners();
     return this._element;
@@ -65,4 +74,32 @@ export default class Card {
     this._element.querySelector(".gallery__heart").removeEventListener("click", this._setLike);
     this._element.querySelector(".gallery__image").removeEventListener("click", this._handleCardClick);
   }
+
+//поставить лайк
+_setLike(data) {
+  this._element.querySelector(".gallery__heart").classList.add('gallery__heart_active');
+  this._element.querySelector('.gallery__like_count').textContent = this._calcLikesNumber(data);
+}
+
+//посчитать обновленное количество лайков
+_calcLikesNumber(data) {
+  this._likes = String(data.likes.length);
+  return this._likes
+}
+
+//удалить лайк
+_removeLike(data) {
+  this._element.querySelector(".gallery__heart").classList.remove('gallery__heart_active');
+  this._element.querySelector('.gallery__like_count').textContent = this._calcLikesNumber(data);
+}
+
+//если текущий пользователь уже ставил лайк
+_likedByCurrentUser() {
+  this._data.likes.forEach((likeOwner) => {
+    if (likeOwner._id === this._currentUser) {
+      this._element.querySelector(".gallery__heart").classList.add('gallery__heart_active');
+    }
+  })
+}
+
 }
