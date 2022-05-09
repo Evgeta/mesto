@@ -10,6 +10,8 @@ export default class PopupConfirmDeletion extends Popup {
     super(popupSelector);
     this._form = this._popup.querySelector('.popup__form'); //форма
     this._buttonSubmit = this._form.querySelector('.popup__button'); //кнопка да - подтверждения удаления
+    console.log('кнопка подтверждения формы');
+    console.log(this._buttonSubmit);
   }
 
   setEventListeners() {

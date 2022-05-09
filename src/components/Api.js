@@ -82,6 +82,8 @@ export default class Api {
   }
 
   setLike(data) {
+    console.log('Отправка запроса на увеличение количества лайков');
+    console.log(data._id);
     return fetch(`${this._baseUrl}/cards/likes/${data._id}`, {
       method: 'PUT',
       headers: this._headers
@@ -93,6 +95,8 @@ export default class Api {
   }
 
   removeLike(data) {
+    console.log('Отправка запроса на уменьшение количества лайков');
+    console.log(data._id);
     return fetch(`${this._baseUrl}/cards/likes/${data._id}`, {
       method: 'DELETE',
       headers: this._headers

@@ -57,11 +57,15 @@ const createNewCard = (item) => {
     },
     currentUser: user_id,
     handleDeleteButtonClick: () => {
+      console.log('созданный объект попапа');
+      console.log(popupDeleteCard);
       popupDeleteCard.open();
       popupDeleteCard.submitDelete(() => {
+        console.log('Запустилось popupDeleteCard.submitDelete');
         api.deleteCard(item._id)
         .then(() => {
-          newCard.deleteCard();
+          console.log('перед newCard.deleteCard();');
+          newCard.removeCard();
           popupDeleteCard.close()
         })
         .catch((err) => {
@@ -70,8 +74,13 @@ const createNewCard = (item) => {
       }) //
     },
     setLike: () => {
-      api.setlike(newCard._data) //пересмотреть
+      console.log('newCard.data');
+      console.log(newCard.data);
+      api.setLike(newCard.data) 
       .then((data) => {
+        console.log('newCard.setLike(data)');
+        console.log('data');
+        console.log(data);
         newCard.setLike(data)
       })
       .catch((err) => {
@@ -79,13 +88,13 @@ const createNewCard = (item) => {
       }); //
     },
     removeLike: () => {
-      api.removeLike(newCard._data) //пересмотреть
+      api.removeLike(newCard.data) 
       .then((data) => {
-        newCard.deleteLike(data)
+        newCard.removeLike(data)
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
-      }); //
+      }); 
     }
   }, galleryItemTemplateSelector);
 
