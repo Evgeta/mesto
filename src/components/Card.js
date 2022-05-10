@@ -19,7 +19,6 @@ export default class Card {
 
     this._handleCardClick = handleCardClick;
     this._handleDeleteButtonClick = handleDeleteButtonClick;
-    console.log(handleDeleteButtonClick);
     this._setLike = setLike;
     this._removeLike = removeLike;
   }
@@ -62,7 +61,6 @@ export default class Card {
   _toggleLike(data) {
     this.classList.toggle('gallery__heart_active');
     this._element.querySelector('.gallery__like-count').textContent = this._calcLikesNumber(data);
-
   }
 
   _setEventListeners() {
@@ -75,7 +73,6 @@ export default class Card {
         this._setLike()
       }
     })
-
   }
 
   _removeEventListeners() {
@@ -88,9 +85,6 @@ export default class Card {
         this._setLike()
       }
     })
-
-
-
   }
 
   //поставить лайк
