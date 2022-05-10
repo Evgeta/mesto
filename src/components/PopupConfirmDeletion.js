@@ -5,7 +5,7 @@ export default class PopupConfirmDeletion extends Popup {
   ) {
 
     console.log('вывод селектора попапа внутри класса');
-     
+
 
     super(popupSelector);
     this._form = this._popup.querySelector('.popup__form'); //форма
@@ -20,7 +20,6 @@ export default class PopupConfirmDeletion extends Popup {
       (evt) => {
         evt.preventDefault();
         this._handleSubmit();
-  //      this._handleFormSubmit(this._getInputValues());
       }
     );
   }

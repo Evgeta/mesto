@@ -9,14 +9,9 @@ export default class UserInfo {
   }
 
   setUserInfo(data) {
-
-    console.log('setUserInfo(data)');
-    console.log(data);
-
     this._name.textContent = data.name;
     this._about.textContent = data.about;
     this._avatar.src = data.avatar;
-
   }
 
   getUserInfo() {
@@ -30,28 +25,3 @@ export default class UserInfo {
     this._avatar.src = data.avatar;
   }
 }
-
-/*
-export default class UserInfo {
-
-  constructor(userNameSelector, aboutSelector) {
-    this._inputName = document.querySelector(userNameSelector);
-    this._inputAbout = document.querySelector(aboutSelector);
-  }
-
-  setUserInfo(data) {
-    this._inputName.textContent = data.name;
-    this._inputAbout.textContent = data.about;
-  }
-
-  getUserInfo() {
-    return {
-      name: this._inputName.textContent,
-      about: this._inputAbout.textContent
-    }
-  }
-}
-
-
-
-*/

@@ -66,7 +66,7 @@ export const validationObject = {
 }
 
 //форма редактирования профиля
-export const formProfile = Array.from(document.querySelectorAll(validationObject.formSelector))[0];
+export const formProfile = document.querySelector('.popup__change-profile-form');
 
 //константы, связанные с добавлением новой карточки
 export const addPlaceSelector = '.popup_new-place';
@@ -77,7 +77,6 @@ export const formAddPlace = popupNewPlace.querySelector('.popup__form'); //фо�
 
 //блок констант, связанных с отображением большой картинки при нажатии/блок констант, связанных с отображением большой картинки при нажатии
 export const bigImageSelector = '.popup_big-image';
-
 
 
 //настройка доступа к API
@@ -98,8 +97,6 @@ export const popupChangeAvatarSelector = '.popup_change-avatar';
 
 //форма редактирования ссылки на аватар
 export const formChangeAvatar = document.querySelector('.popup__change-avatar-form');
-console.log('Форрма редактирования ссылки на аватар');
-console.log(formChangeAvatar);
 
 //селектор кнопки редактирования аватара
 export const avatarEditButtonSelector = '.profile__avatar-pen';
