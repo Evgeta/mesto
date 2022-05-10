@@ -107,7 +107,21 @@ export default class Api {
     });
   }
 
-
+  setAvatar(data) {
+    console.log('Отправка запроса на установку нового аватара');
+    console.log(data._id);
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: data.avatar
+      })
+    })
+    .then((res) => this._checkResponse(res))
+    .catch((err) => {
+      console.log(err); // выведем ошибку в консоль
+    });
+  }
 
 
 

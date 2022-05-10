@@ -8,5 +8,6 @@
   .profile__info {
     align-items: flex-start;
     justify-content: center;
+    padding-left: 30px;
   }
 }

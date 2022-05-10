@@ -29,7 +29,10 @@ import {
   deleteCardPopupSelector,
   userNameSelector,
   userAboutSelector,
-  userAvatarSelector
+  userAvatarSelector,
+  popupChangeAvatarSelector,
+  formChangeAvatar,
+  avatarEditButton
 } from '../utils/constants.js';
 
 
@@ -176,6 +179,42 @@ profileNameEditButton.addEventListener('click', () => {
   inputAbout.value = about;
   popupProfile.open();
 })
+
+
+
+//создание попапа для редактирования аватара пользователя
+
+const popupChangeAvatar = new PopupWithForm({
+  popupSelector: popupChangeAvatarSelector,
+  handleFormSubmit: (data) => {
+    api.setAvatar(data)
+    .then((res) => {
+
+      console.log('console.log(res);');
+      console.log(res);
+     // userOnPage.setAvatar(res);
+      popupChangeAvatar.close();
+    })
+    .catch((err) => {
+     console.log(`Ошибка api.setAvatar(data): ${err.status}`)
+    })
+  }
+})
+
+popupChangeAvatar.setEventListeners();
+
+//создание класса валидации
+const formChangeAvatarsValidator = new FormValidator(validationObject, formChangeAvatar);
+//включение валидации в форме редактирования профиля
+formChangeAvatarsValidator.enableValidation();
+
+
+//создание слушателя для кнопки редактирования аватара
+avatarEditButton.addEventListener('click', () => {
+  formChangeAvatar.toggleButtonState();
+  popupChangeAvatar.open();
+})
+
 
 //добавление новой карточки
 const popupAddPlace = new PopupWithForm({

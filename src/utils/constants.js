@@ -93,4 +93,17 @@ export const userAvatarSelector = '.profile__avatar';
 //константы, связанные с добавлением новой карточки
 export const deleteCardPopupSelector = '.popup_delete-card';
 
+//селектор попапа обновления автара
+export const popupChangeAvatarSelector = '.popup_change-avatar';
+
+//форма редактирования ссылки на аватар
+export const formChangeAvatar = Array.from(document.querySelectorAll(validationObject.formSelector))[3];
+console.log('Форрма редактирования ссылки на аватар');
+console.log(formChangeAvatar);
+
+//селектор кнопки редактирования аватара
+export const avatarEditButtonSelector = '.profile__avatar-pen';
+
+//ссылка на кнопку редактирвания аватара
+export const avatarEditButton = profile.querySelector(avatarEditButtonSelector);
 

@@ -17,7 +17,11 @@
     <main class="content">
       <section class="profile">
         <div class="profile__left-block">
-          <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Фото профиля">
+          <div class="profile__avatar-with-button">
+            <img class="profile__avatar" src="<%=require('./images/avatar.jpg')%>" alt="Фото профиля">
+            <!-- <img class="profile__avatar" src="#" alt="Фото профиля"> --> 
+            <button class="profile__avatar-pen"></button>
+          </div>
           <div class="profile__info">
             <div class="profile__name-edit-btn">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -67,6 +71,7 @@
       </div>
     </div>
   </div>
+
   <div class="popup popup_new-place">
     <div class="popup__container">
       <button class="popup__close-btn" type="button" aria-label="Кнопка закрытия всплывающего окна"></button>
@@ -104,6 +109,22 @@
       </form>
     </div>
   </div>
+
+  <div class="popup popup_change-avatar">
+    <div class="popup__container">
+      <button class="popup__close-btn" type="button" aria-label="Кнопка закрытия всплывающего окна"></button>
+      <form class="popup__form" name="changeAvatarForm" novalidate>
+        <h3 class="popup__title">Обновить аватар</h3>
+        <fieldset class="popup__fieldset">
+          <input type="url" class="popup__input popup__input_type_link" id="avatar-url-input" name="link" placeholder="Ссылка на аватар" required>
+          <span class="popup__error place-url-input-error"></span>
+          <button type="submit" class="popup__button">Сохранить</button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+
+
 
  </body>
 
