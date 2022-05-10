@@ -97,7 +97,7 @@ export const deleteCardPopupSelector = '.popup_delete-card';
 export const popupChangeAvatarSelector = '.popup_change-avatar';
 
 //форма редактирования ссылки на аватар
-export const formChangeAvatar = Array.from(document.querySelectorAll(validationObject.formSelector))[3];
+export const formChangeAvatar = document.querySelector('.popup__change-avatar-form');
 console.log('Форрма редактирования ссылки на аватар');
 console.log(formChangeAvatar);
 

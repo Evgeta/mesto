@@ -108,11 +108,16 @@ export default class Api {
   }
 
   setAvatar(data) {
-    console.log('Отправка запроса на установку нового аватара');
-    console.log(data._id);
+    console.log('Отправка запроса на установку нового аватара api.setAvatar(data)');
+    console.log(data);
+    //console.log(data._id);
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json'
+      },
+
       body: JSON.stringify({
         avatar: data.avatar
       })

@@ -79,7 +79,7 @@ const createNewCard = (item) => {
     setLike: () => {
       console.log('newCard.data');
       console.log(newCard.data);
-      api.setLike(newCard.data) 
+      api.setLike(newCard.data)
       .then((data) => {
         console.log('newCard.setLike(data)');
         console.log('data');
@@ -91,13 +91,13 @@ const createNewCard = (item) => {
       }); //
     },
     removeLike: () => {
-      api.removeLike(newCard.data) 
+      api.removeLike(newCard.data)
       .then((data) => {
         newCard.removeLike(data)
       })
       .catch((err) => {
         console.log(err); // выведем ошибку в консоль
-      }); 
+      });
     }
   }, galleryItemTemplateSelector);
 
@@ -119,25 +119,38 @@ const cardsList = new Section({
 let user_id = null;
 
 //Запрос на получение карточек
-api.getInitialCards()
-.then((cardsFromServer) => {
-  cardsList.renderItems(cardsFromServer);
-})
-.catch((err) => {
- console.log(`Ошибка в api.getInitialCards(): ${err.status}`)
-})
+// api.getInitialCards()
+// .then((cardsFromServer) => {
+//   cardsList.renderItems(cardsFromServer);
+// })
+// .catch((err) => {
+//  console.log(`Ошибка в api.getInitialCards(): ${err.status}`)
+// })
 
 
 //Запрос информации о пользователе
-api.getUserInfo()
-.then((userInfo) => {
-  user_id = userInfo._id;
-  console.log(user_id);
-  console.log(userInfo);
-  userOnPage.setUserInfo(userInfo);
+// api.getUserInfo()
+// .then((userInfo) => {
+//   user_id = userInfo._id;
+//   console.log(user_id);
+//   console.log(userInfo);
+//   userOnPage.setUserInfo(userInfo);
+// })
+// .catch((err) => {
+//  console.log(`Ошибка в api.getUserInfo: ${err.status}`)
+// })
+
+
+//Запросы на получение карточек и информации о пользователе
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+.then(([userInfo, cardsFromServer]) => {
+    user_id = userInfo._id;
+    userOnPage.setUserInfo(userInfo);
+    cardsList.renderItems(cardsFromServer);
 })
 .catch((err) => {
- console.log(`Ошибка в api.getUserInfo: ${err.status}`)
+  console.log(`Ошибка: ${err.status}`)
 })
 
 
@@ -147,6 +160,7 @@ api.getUserInfo()
 const popupProfile = new PopupWithForm({
   popupSelector: profilePopupSelector,
   handleFormSubmit: (userData) => {
+    popupProfile.renderLoading(true);
     api.setUserInfo(userData)
     .then((res) => {
 
@@ -158,6 +172,9 @@ const popupProfile = new PopupWithForm({
     .catch((err) => {
      console.log(`Ошибка api.setUserInfo(userData): ${err.status}`)
     })
+    .finally(() => {
+      popupProfile.renderLoading(false);
+    });
   }
 })
 
@@ -181,37 +198,45 @@ profileNameEditButton.addEventListener('click', () => {
 })
 
 
-
 //создание попапа для редактирования аватара пользователя
 
 const popupChangeAvatar = new PopupWithForm({
   popupSelector: popupChangeAvatarSelector,
   handleFormSubmit: (data) => {
+    popupChangeAvatar.renderLoading(true);
     api.setAvatar(data)
     .then((res) => {
 
       console.log('console.log(res);');
       console.log(res);
-     // userOnPage.setAvatar(res);
+      userOnPage.setAvatar(res);
       popupChangeAvatar.close();
     })
     .catch((err) => {
      console.log(`Ошибка api.setAvatar(data): ${err.status}`)
     })
+    .finally(() => {
+      popupChangeAvatar.renderLoading(false);
+    });
   }
 })
 
 popupChangeAvatar.setEventListeners();
 
+
+console.log('перед включение валидации');
+console.log(validationObject);
+console.log(formChangeAvatar);
+
 //создание класса валидации
-const formChangeAvatarsValidator = new FormValidator(validationObject, formChangeAvatar);
+const formChangeAvatarValidator = new FormValidator(validationObject, formChangeAvatar);
 //включение валидации в форме редактирования профиля
-formChangeAvatarsValidator.enableValidation();
+formChangeAvatarValidator.enableValidation();
 
 
 //создание слушателя для кнопки редактирования аватара
 avatarEditButton.addEventListener('click', () => {
-  formChangeAvatar.toggleButtonState();
+  formChangeAvatarValidator.toggleButtonState();
   popupChangeAvatar.open();
 })
 
@@ -220,7 +245,7 @@ avatarEditButton.addEventListener('click', () => {
 const popupAddPlace = new PopupWithForm({
   popupSelector: addPlaceSelector,
   handleFormSubmit: (imageData) => {
-
+    popupAddPlace.renderLoading(true);
     api.addNewCard(imageData)
     .then((imageData) => {
       cardsList.addItem(createNewCard(imageData));
@@ -229,6 +254,10 @@ const popupAddPlace = new PopupWithForm({
     .catch((err) => {
      console.log(`Ошибка api.addNewCard(imageData): ${err.status}`)
     })
+    .finally(() => {
+      popupAddPlace.renderLoading(false);
+    });
+
   }
 })
 
