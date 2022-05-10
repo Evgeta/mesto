@@ -1,4 +1,4 @@
-# Проект: Учебный проект Яндекс.Практикума. Спринт 8. Место.
+# Проект: Учебный проект Яндекс.Практикума. Спринт 9. Место.
 ### Обзор
 * Описание проекта
 * Технологии
@@ -27,14 +27,15 @@
 * Использованы ES6-классы
 * Использовано слабое связывание классов
 * Использована деструктуризация
+* Реализована работа с API
 
 **Figma**
 
 Проект сделан по следующему макету:
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6?node-id=0%3A1)
+* [Ссылка на макет в Figma](https://www.figma.com/file/PSdQFRHoxXJFs2FH8IXViF/JavaScript-9-sprint?node-id=0%3A1)
 
-Чеклист по проекту [Чеклист](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-8.pdf)
+Чеклист по проекту [Чеклист](https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-9.pdf)
 
 [Ссылка на проект](https://evgeta.github.io/mesto/)
 
