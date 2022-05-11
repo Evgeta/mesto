@@ -22,8 +22,4 @@ export default class PopupConfirmDeletion extends Popup {
     this._handleSubmit = handleSubmit;
   }
 
-  close() {
-    super.close();
-    this._form.reset();
-  }
 }

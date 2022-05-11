@@ -33,7 +33,4 @@ export default class Popup {
     this._popup.addEventListener('mousedown', this._handleMouseDownOnOverlayAndCrossButton);
   }
 
-  _removeEventListeners() {
-    this._popup.removeEventListener('mousedown', this._handleMouseDownOnOverlayAndCrossButton);
-  }
 }

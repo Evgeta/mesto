@@ -155,6 +155,7 @@ profileNameEditButton.addEventListener('click', () => {
   } = userOnPage.getUserInfo();
   inputName.value = name;
   inputAbout.value = about;
+  formEditProfileValidator.resetValidation();
   popupProfile.open();
 })
 
@@ -167,7 +168,7 @@ const popupChangeAvatar = new PopupWithForm({
     popupChangeAvatar.renderLoading(true);
     api.setAvatar(data)
     .then((res) => {
-      userOnPage.setAvatar(res);
+      userOnPage.setUserInfo(res);
       popupChangeAvatar.close();
     })
     .catch((err) => {
@@ -188,7 +189,7 @@ formChangeAvatarValidator.enableValidation();
 
 //создание слушателя для кнопки редактирования аватара
 avatarEditButton.addEventListener('click', () => {
-  formChangeAvatarValidator.toggleButtonState();
+  formChangeAvatarValidator.resetValidation();
   popupChangeAvatar.open();
 })
 
@@ -217,7 +218,7 @@ popupAddPlace.setEventListeners();
 
 //создание слушателя для кнопки добавления нового места
 placeAddButton.addEventListener('click', () => {
-  formAddPlaceValidator.toggleButtonState();
+  formAddPlaceValidator.resetValidation();
   popupAddPlace.open();
 })
 
@@ -234,7 +235,6 @@ popupWithImg.setEventListeners();
 //создание попапа подтверждения удаления карточки
 
 const popupDeleteCard = new PopupConfirmDeletion(deleteCardPopupSelector);
-
 popupDeleteCard.setEventListeners();
 
 

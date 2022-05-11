@@ -8,10 +8,6 @@ export default class FormValidator {
     this._errorClass = validationSettings.errorClass;
     //элемент той формы, которая валидируется
     this._formElement = formElement;
-
-    this._button = this._formElement.querySelector(".popup__button");
-
-    this._fieldsetList = Array.from(this._formElement.querySelectorAll('.popup__fieldset'));
     this._buttonElement = this._formElement.querySelector(this._submitButtonSelector);
     this._inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
   }
@@ -49,21 +45,28 @@ export default class FormValidator {
   }
 
   _enableButton = () => {
-    this._button.classList.remove(this._inactiveButtonClass);
-    this._button.disabled = false;
+    this._buttonElement.classList.remove(this._inactiveButtonClass);
+    this._buttonElement.disabled = false;
   };
 
   disableButton = () => {
-    this._button.classList.add(this._inactiveButtonClass);
-    this._button.disabled = true;
+    this._buttonElement.classList.add(this._inactiveButtonClass);
+    this._buttonElement.disabled = true;
   };
 
   toggleButtonState = () => {
     if (this._hasInvalidInput(this._inputList)) {
-      this.disableButton(this._buttonElement, this._inactiveButtonClass);
+      this.disableButton();
     } else {
-      this._enableButton(this._buttonElement, this._inactiveButtonClass);
+      this._enableButton();
     }
+  }
+
+  resetValidation() {
+    this.toggleButtonState();
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+    });
   }
 
   _setEventListeners = () => {

@@ -8,7 +8,7 @@ export default class Api {
     this._token = headers.authorization;
   }
 
-//проверка ответа
+  //проверка ответа
   _checkResponse(res) {
     if (res.ok) {
       return res.json();
@@ -16,116 +16,85 @@ export default class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  //получение карочек с сервера
+  //получение карточек с сервера
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
         headers: this._headers
       })
 
       .then((res) => this._checkResponse(res))
-      .catch((err) => {
-        console.log(err); // выведем ошибку в консоль
-      });
   }
 
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
-      headers: {
-        authorization: this._token,
-      }
-    })
-    .then((res) => this._checkResponse(res))
-    .catch((err) => {
-      console.log(err); // выведем ошибку в консоль
-    });
+        headers: {
+          authorization: this._token,
+        }
+      })
+      .then((res) => this._checkResponse(res))
   }
 
   setUserInfo(data) {
     return fetch(`${this._baseUrl}/users/me`, {
-      method: 'PATCH',
-      headers: this._headers,
-      body: JSON.stringify({
-        name: data.name,
-        about: data.about
+        method: 'PATCH',
+        headers: this._headers,
+        body: JSON.stringify({
+          name: data.name,
+          about: data.about
+        })
       })
-    })
-    .then((res) => this._checkResponse(res))
-    .catch((err) => {
-      console.log(err); // выведем ошибку в консоль
-    });
+      .then((res) => this._checkResponse(res))
   }
 
   addNewCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
-      method: 'POST',
-      headers: this._headers,
-      body: JSON.stringify({
-        name: data.name,
-        link: data.link
+        method: 'POST',
+        headers: this._headers,
+        body: JSON.stringify({
+          name: data.name,
+          link: data.link
+        })
       })
-    })
-    .then((res) => this._checkResponse(res))
-    .catch((err) => {
-      console.log(err); // выведем ошибку в консоль
-    });
+      .then((res) => this._checkResponse(res))
   }
 
   deleteCard(_id) {
     return fetch(`${this._baseUrl}/cards/${_id}`, {
-      method: 'DELETE',
-      headers: this._headers
-    })
-    .then((res) => this._checkResponse(res))
-    .catch((err) => {
-      console.log(err); // выведем ошибку в консоль
-    });
+        method: 'DELETE',
+        headers: this._headers
+      })
+      .then((res) => this._checkResponse(res))
   }
 
   setLike(data) {
-    console.log('Отправка запроса на увеличение количества лайков');
-    console.log(data._id);
     return fetch(`${this._baseUrl}/cards/likes/${data._id}`, {
-      method: 'PUT',
-      headers: this._headers
-    })
-    .then((res) => this._checkResponse(res))
-    .catch((err) => {
-      console.log(err); // выведем ошибку в консоль
-    });
+        method: 'PUT',
+        headers: this._headers
+      })
+      .then((res) => this._checkResponse(res))
   }
 
   removeLike(data) {
-    console.log('Отправка запроса на уменьшение количества лайков');
-    console.log(data._id);
     return fetch(`${this._baseUrl}/cards/likes/${data._id}`, {
-      method: 'DELETE',
-      headers: this._headers
-    })
-    .then((res) => this._checkResponse(res))
-    .catch((err) => {
-      console.log(err); // выведем ошибку в консоль
-    });
+        method: 'DELETE',
+        headers: this._headers
+      })
+      .then((res) => this._checkResponse(res))
   }
 
   setAvatar(data) {
-    console.log('Отправка запроса на установку нового аватара api.setAvatar(data)');
-    console.log(data);
-    //console.log(data._id);
     return fetch(`${this._baseUrl}/users/me/avatar`, {
-      method: 'PATCH',
-      headers: {
-        authorization: this._token,
-        'Content-Type': 'application/json'
-      },
+        method: 'PATCH',
+        headers: {
+          authorization: this._token,
+          'Content-Type': 'application/json'
+        },
 
-      body: JSON.stringify({
-        avatar: data.avatar
+        body: JSON.stringify({
+          avatar: data.avatar
+        })
       })
-    })
-    .then((res) => this._checkResponse(res))
-    .catch((err) => {
-      console.log(err); // выведем ошибку в консоль
-    });
+      .then((res) => this._checkResponse(res))
   }
 
 
