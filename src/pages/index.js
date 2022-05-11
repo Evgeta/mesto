@@ -17,10 +17,8 @@ import {
   inputName,
   inputAbout,
   validationObject,
-  formProfile,
   addPlaceSelector,
   placeAddButton,
-  formAddPlace,
   bigImageSelector,
   baseUrl,
   token,
@@ -29,7 +27,6 @@ import {
   userAboutSelector,
   userAvatarSelector,
   popupChangeAvatarSelector,
-  formChangeAvatar,
   avatarEditButton
 } from '../utils/constants.js';
 
@@ -67,8 +64,8 @@ const createNewCard = (item) => {
         })
         .catch((err) => {
           console.log(err); // выведем ошибку в консоль
-        }); //
-      }) //
+        });
+      })
     },
     setLike: () => {
       api.setLike(newCard.data)
@@ -101,10 +98,8 @@ const cardsList = new Section({
   gallerySelector
 );
 
-
 //объявление идентификатора пользователя
 let user_id = null;
-
 
 //Запросы на получение карточек и информации о пользователе
 
@@ -118,9 +113,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
   console.log(`Ошибка: ${err.status}`)
 })
 
-
 //создание попапа для редактирования профиля пользователя
-
 const popupProfile = new PopupWithForm({
   popupSelector: profilePopupSelector,
   handleFormSubmit: (userData) => {
@@ -177,11 +170,9 @@ popupChangeAvatar.setEventListeners();
 
 //создание слушателя для кнопки редактирования аватара
 avatarEditButton.addEventListener('click', () => {
-  //formChangeAvatarValidator.resetValidation();
   formValidators['changeAvatarForm'].resetValidation();
   popupChangeAvatar.open();
 })
-
 
 //добавление новой карточки
 const popupAddPlace = new PopupWithForm({
