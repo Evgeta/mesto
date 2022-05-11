@@ -141,12 +141,6 @@ const popupProfile = new PopupWithForm({
 
 popupProfile.setEventListeners();
 
-//создание класса валидации
-const formEditProfileValidator = new FormValidator(validationObject, formProfile);
-//включение валидации в форме редактирования профиля
-formEditProfileValidator.enableValidation();
-
-
 //создание слушателя для кнопки редактирования профиля
 profileNameEditButton.addEventListener('click', () => {
   const {
@@ -155,13 +149,12 @@ profileNameEditButton.addEventListener('click', () => {
   } = userOnPage.getUserInfo();
   inputName.value = name;
   inputAbout.value = about;
-  formEditProfileValidator.resetValidation();
+  formValidators['editProfileForm'].resetValidation();
   popupProfile.open();
 })
 
 
 //создание попапа для редактирования аватара пользователя
-
 const popupChangeAvatar = new PopupWithForm({
   popupSelector: popupChangeAvatarSelector,
   handleFormSubmit: (data) => {
@@ -182,14 +175,10 @@ const popupChangeAvatar = new PopupWithForm({
 
 popupChangeAvatar.setEventListeners();
 
-//создание класса валидации
-const formChangeAvatarValidator = new FormValidator(validationObject, formChangeAvatar);
-//включение валидации в форме редактирования профиля
-formChangeAvatarValidator.enableValidation();
-
 //создание слушателя для кнопки редактирования аватара
 avatarEditButton.addEventListener('click', () => {
-  formChangeAvatarValidator.resetValidation();
+  //formChangeAvatarValidator.resetValidation();
+  formValidators['changeAvatarForm'].resetValidation();
   popupChangeAvatar.open();
 })
 
@@ -218,14 +207,9 @@ popupAddPlace.setEventListeners();
 
 //создание слушателя для кнопки добавления нового места
 placeAddButton.addEventListener('click', () => {
-  formAddPlaceValidator.resetValidation();
+  formValidators['newPlaceForm'].resetValidation();
   popupAddPlace.open();
 })
-
-//создание класса валидации
-const formAddPlaceValidator = new FormValidator(validationObject, formAddPlace);
-//включение валидации в форме добавления места
-formAddPlaceValidator.enableValidation();
 
 //попап с картинкой
 const popupWithImg = new PopupWithImage(bigImageSelector);
@@ -233,8 +217,22 @@ popupWithImg.setEventListeners();
 
 
 //создание попапа подтверждения удаления карточки
-
 const popupDeleteCard = new PopupConfirmDeletion(deleteCardPopupSelector);
 popupDeleteCard.setEventListeners();
 
 
+//валидаторы всех форм
+const formValidators = {}
+
+// Включение валидации
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector))
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement)
+    const formName = formElement.getAttribute('name')
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(validationObject);
