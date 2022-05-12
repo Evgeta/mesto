@@ -68,11 +68,6 @@ export default class Card {
     this._element = null;
   }
 
-  _toggleLike(data) {
-    this.classList.toggle('gallery__heart_active');
-    this._galleryLikeCount.textContent = this._calcLikesNumber(data);
-  }
-
   _setEventListeners() {
     this._deleteButton.addEventListener("click", this._handleDeleteButtonClick);
     this._cardImage.addEventListener("click", this._handleCardClick);
@@ -107,8 +102,7 @@ export default class Card {
   _likedByCurrentUser() {
     this.data.likes.forEach((likeOwner) => {
       if (likeOwner._id === this._currentUser) {
-        this._element.querySelector('.gallery__heart').classList.add('gallery__heart_active');
-        this._galleryHeart = this._element.querySelector('.gallery__heart');
+        this._galleryHeart.classList.add('gallery__heart_active');
       }
     })
   }

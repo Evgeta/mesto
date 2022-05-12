@@ -53,7 +53,7 @@ const createNewCard = (item) => {
     handleCardClick: () => {
       popupWithImg.open(item);
     },
-    currentUser: user_id,
+    currentUser: userId,
     handleDeleteButtonClick: () => {
       popupDeleteCard.open();
       popupDeleteCard.submitDelete(() => {
@@ -99,13 +99,13 @@ const cardsList = new Section({
 );
 
 //объявление идентификатора пользователя
-let user_id = null;
+let userId = null;
 
 //Запросы на получение карточек и информации о пользователе
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
 .then(([userInfo, cardsFromServer]) => {
-    user_id = userInfo._id;
+    userId = userInfo._id;
     userOnPage.setUserInfo(userInfo);
     cardsList.renderItems(cardsFromServer);
 })
